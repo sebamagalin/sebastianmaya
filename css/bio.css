@@ -1,0 +1,431 @@
+/* ── BIO RPG STAGE (pantalla completa, sin scroll) ── */
+body.page-bio { overflow: hidden; height: 100vh; }
+
+.bio-fullpage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.bio-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  cursor: none;
+}
+
+.bio-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 130%;
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
+  user-select: none;
+}
+
+.bio-bg-img.reveal {
+  clip-path: circle(0px at 50% 50%);
+  will-change: clip-path;
+}
+
+.mobile-only { display: none; }
+
+.bio-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.15) 35%, transparent 55%),
+              linear-gradient(0deg, rgba(0,0,0,.7) 0%, transparent 30%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bio-lens {
+  position: absolute;
+  top: 0; left: 0;
+  width: clamp(160px, 20vw, 260px);
+  height: clamp(160px, 20vw, 260px);
+  margin-left: calc(clamp(160px, 20vw, 260px) / -2);
+  margin-top: calc(clamp(160px, 20vw, 260px) / -2);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border: 10px solid #FE7202;
+  box-shadow:
+    0 0 0 4px rgba(0, 0, 0, 0.55),
+    0 0 35px 10px rgba(254, 114, 2, 0.55),
+    0 0 60px 20px rgba(245, 57, 12, 0.35),
+    inset 0 0 25px rgba(245, 57, 12, 0.45);
+  z-index: 4;
+}
+
+.bio-lens::after {
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 18px rgba(254, 114, 2, 0.4);
+}
+
+.bio-stage.is-active .bio-lens { opacity: 1; }
+
+.bio-header {
+  position: absolute;
+  top: 70px;
+  left: 40px;
+  z-index: 5;
+  max-width: 50%;
+}
+
+.bio-badge {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(0.65rem, 0.9vw, 0.85rem);
+  padding: 0.3em 0.8em;
+  border-radius: 5px;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.6em;
+}
+
+.bio-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4.8vw, 3.6rem);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  line-height: 1.3;
+  margin: 0 0 -0.2em;
+}
+
+.bio-handle {
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(0.85rem, 2.2vw, 1.6rem);
+}
+
+.bio-menu {
+  position: absolute;
+  top: 28%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 5;
+  width: 18%;
+  min-width: 180px;
+}
+
+.bio-menu-left { left: 0; }
+.bio-menu-right { right: 0; align-items: flex-end; }
+
+.bio-menu-btn {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+  padding: 0.55em 1.2em;
+  border: none;
+  cursor: pointer;
+  width: 120%;
+  transition: filter 0.2s ease, border-radius 0.2s ease;
+  font-family: var(--font-display);
+}
+
+.bio-menu-left .bio-menu-btn { text-align: left; border-radius: 0 30px 30px 0; padding-left: 40px; }
+.bio-menu-right .bio-menu-btn { text-align: right; border-radius: 30px 0 0 30px; padding-right: 40px; }
+.bio-menu-left .bio-menu-btn.active { text-align: left; border-radius: 0 30px 0 0; }
+.bio-menu-right .bio-menu-btn.active { text-align: right; border-radius: 30px 0 0 0; }
+
+.bio-menu-btn:hover,
+.bio-menu-btn.active { filter: brightness(1.8); }
+
+.bio-lore {
+  position: absolute;
+  left: 2.6%;
+  bottom: 150px;
+  width: 26%;
+  min-width: 220px;
+  max-height: 30%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 1em 1.2em;
+  z-index: 3;
+}
+
+.bio-lore-label {
+  display: block;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+  color: #fff;
+  opacity: 0.7;
+  margin-bottom: 0.5em;
+  letter-spacing: 1px;
+}
+
+.bio-lore p {
+  color: #fff;
+  font-size: clamp(0.7rem, 0.95vw, 0.85rem);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.bio-stats {
+  position: absolute;
+  right: 2.6%;
+  bottom: 150px;
+  width: 20%;
+  min-width: 240px;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 0.6em 0.8em;
+  z-index: 3;
+}
+
+.char-stats { display: flex; flex-direction: column; gap: 0.45em; }
+.stat-row { display: flex; flex-direction: column; gap: 1px; }
+.stat-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: clamp(0.6rem, 0.8vw, 0.78rem);
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+.stat-bar-bg { height: 6px; background: rgba(255, 255, 255, 0.12); border-radius: 10px; overflow: hidden; }
+.stat-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 10px;
+  width: 0%;
+  box-shadow: 0 0 8px var(--accent);
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bio-metrics {
+  position: absolute;
+  left: 50%;
+  bottom: 170px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: clamp(40px, 7vw, 100px);
+  z-index: 3;
+  text-align: center;
+}
+.metric { display: flex; flex-direction: column; }
+.metric-num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 3.3vw, 2.8rem);
+  color: var(--accent);
+  line-height: 1;
+}
+.metric-label { color: #fff; font-size: clamp(0.6rem, 0.8vw, 0.78rem); margin-top: 0.3em; }
+
+.bio-tagline {
+  position: absolute;
+  left: 50%;
+  bottom: 150px;
+  transform: translateX(-50%);
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(0.55rem, 0.85vw, 0.75rem);
+  letter-spacing: 0.5px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 3;
+  margin: 0;
+}
+
+.bio-panel {
+  position: absolute;
+  top: 78%;
+  max-height: 26%;
+  overflow: auto;
+  box-sizing: border-box;
+  background: rgba(8, 8, 8, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 1.2em;
+  z-index: 10;
+  display: none;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+}
+.bio-panel.open { display: block; }
+.bio-panel-left { left: 2.6%; width: 26%; min-width: 220px; border-radius: 10px; }
+.bio-panel-right { right: 2.6%; left: auto; width: 26%; min-width: 220px; border-radius: 10px; }
+
+.panel-compact { padding: 0.6em; width: 30% !important; min-width: 200px; }
+.mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5em; }
+.mini-stat { display: flex; flex-direction: column; gap: 2px; }
+.mini-label { font-size: clamp(0.6rem, 0.8vw, 0.75rem); font-weight: 800; text-transform: uppercase; color: var(--accent); }
+.mini-val { color: #fff; font-weight: 700; font-size: clamp(0.75rem, 1vw, 0.95rem); }
+
+.job-grid.scroll-x { display: flex; flex-direction: column; gap: 0.8em; overflow-x: hidden; overflow-y: auto; max-height: 100%; padding-bottom: 0; }
+.job-card { width: 100%; flex: 0 0 auto; }
+.job-card { background: rgba(0, 0, 0, 0.75); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 1em 1.2em; }
+.job-card h4 { color: var(--accent); font-size: clamp(0.85rem, 1.1vw, 1rem); margin: 0 0 0.3em; }
+.job-meta { color: #fff; opacity: 0.6; font-size: clamp(0.6rem, 0.8vw, 0.72rem); margin-bottom: 0.6em; }
+.job-card p { color: #fff; font-size: clamp(0.65rem, 0.85vw, 0.78rem); line-height: 1.5; margin: 0; }
+
+.edu-grid.scroll-x { display: flex; align-items: flex-start; gap: 0.8em; overflow-x: auto; overflow-y: visible; padding-bottom: 0.4em; }
+.edu-card { background: var(--accent); border-radius: 10px; padding: 0.9em 1em; border: none; cursor: pointer; text-align: left; min-width: 160px; flex: 0 0 auto; font-family: var(--font-body); }
+.edu-card h4 { color: #fff; font-size: clamp(0.75rem, 1vw, 0.9rem); margin: 0 0 0.3em; }
+.edu-card span { color: rgba(255, 255, 255, 0.85); font-size: clamp(0.62rem, 0.8vw, 0.72rem); }
+
+/* Recuadro fijo del resumen de Formación — mismo tamaño siempre, como la caja de estadísticas */
+.inline-desc-box {
+  width: 100%;
+  box-sizing: border-box;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 0;
+  margin-top: 0;
+  color: #fff;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  transition: height 0.25s ease, opacity 0.25s ease, padding 0.25s ease, margin-top 0.25s ease;
+}
+.inline-desc-box.open {
+  height: 140px;
+  opacity: 0.95;
+  padding: 0.8em 1em;
+  margin-top: 0.8em;
+  overflow-y: auto;
+}
+
+.tool-grid.scroll-x { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6em; overflow: visible; padding-bottom: 0; }
+.tool-chip {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 0.85em;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background 0.35s ease;
+}
+.skill-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.skill-logo-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: clamp(0.9rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.5px;
+  color: var(--accent);
+}
+.tool-chip.open { background: #000; }
+.tool-chip.open .skill-logo { opacity: 0; transform: scale(0.6); }
+
+/* ── RESPONSIVE (iPhone 16/17 Pro Max) ── */
+@media (max-width: 900px) {
+  .bio-stage { cursor: auto; border-radius: 0; }
+  .desktop-only { display: none; }
+  .mobile-only { display: block; }
+
+  .bio-header { top: 50px; bottom: auto; left: 5%; max-width: 90%; }
+
+  .bio-menu { top: 42%; bottom: auto; flex-direction: column; width: 32%; gap: 8px; }
+  .bio-menu-left { left: -10%; right: auto; }
+  .bio-menu-right { left: auto; right: -5%; top: 42%; align-items: stretch; }
+  .bio-menu-left .bio-menu-btn,
+  .bio-menu-right .bio-menu-btn {
+    text-align: center;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    padding: 0.4em 0.2em;
+  }
+  .bio-menu-left .bio-menu-btn.active,
+  .bio-menu-right .bio-menu-btn.active { border-radius: 30px 30px 0 0; }
+
+  .bio-stats { top: calc(35% + 110px); bottom: auto; left: 5%; right: 5%; width: auto; }
+  .bio-lore { left: 5%; right: 5%; width: auto; bottom: 190px; max-height: 10%; }
+  .bio-metrics { bottom: 120px; gap: 60px; }
+  .bio-tagline { bottom: 90px; white-space: normal; width: 100%; }
+
+  .bio-panel { max-height: calc(100vh - 340px); }
+  /* Antes esta regla ponía left:8% Y right:8% al mismo tiempo en AMBAS
+     clases, así que los 4 paneles (perfil/experiencia/formación/
+     habilidades) terminaban calculando la misma caja y se superponían.
+     Ahora cada lado tiene su propio ancho y una separación real (6%)
+     entre el grupo izquierdo (perfil/experiencia) y el derecho
+     (formación/habilidades). */
+  .bio-panel-left { left: 3%; right: auto; width: 44%; min-width: 0; }
+  .bio-panel-right { right: 3%; left: auto; width: 44%; min-width: 0; }
+  .panel-compact { width: 44% !important; left: 3% !important; right: auto !important; min-width: 0 !important; }
+  .mini-grid { grid-template-columns: repeat(2, 1fr); gap: 0.35em; }
+  .mini-stat { gap: 0; }
+
+  #panel-formacion { width: 44% !important; left: auto !important; right: 3% !important; min-width: 0 !important; }
+
+  .job-grid.scroll-x, .edu-grid.scroll-x {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 0;
+  }
+  .job-card, .edu-card { min-width: auto; width: 100%; }
+
+  .tool-grid.scroll-x { grid-template-columns: repeat(3, 1fr); gap: 0.4em; }
+  .tool-chip { padding: 0.55em; }
+  .skill-logo-text { font-size: clamp(0.75rem, 3vw, 1rem); }
+}
+
+.tool-chip .card-desc {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0.8em;
+  margin: 0;
+  overflow: hidden;
+  color: #fff;
+  font-size: 0.62rem;
+  line-height: 1.35;
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.tool-chip.open .card-desc {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}

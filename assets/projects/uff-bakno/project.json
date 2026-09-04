@@ -1,0 +1,91 @@
+{
+  "id": "uff-bakno",
+  "title": "Uff Bakno",
+  "niche": "STREET FLAVOR BRAND SYSTEM",
+  "hero": {
+    "image": "01-hero.jpeg",
+    "description": "Desarrollo estratégico de identidad de marca, sistema gráfico y experiencia visual para Uff Bakno. Construimos una identidad inspirada en la cultura urbana, el sabor callejero y la cercanía con las personas, creando un universo gráfico auténtico que convierte cada interacción en una experiencia memorable."
+  },
+  "meta": {
+    "cliente": "Uff Bakno",
+    "año": "2024",
+    "rol": "Brand Strategy | Brand Identity | Graphic System | Packaging | Brand Experience | Art Direction"
+  },
+  "sections": [
+    {
+      "type": "text-image",
+      "layout": "image-right",
+      "title": "CONCEPTO DE MARCA",
+      "text": "Uff Bakno nace de la cultura del parche, la comida callejera y esos lugares donde las personas no solo van a comer, sino a compartir.\n\nDesde el inicio, el objetivo fue construir una marca con personalidad propia, capaz de transmitir cercanía, actitud y autenticidad en cada punto de contacto.",
+      "image": "02-concept.jpeg"
+    },
+    {
+      "type": "text-gallery",
+      "layout": "image-right",
+      "title": "ECOSISTEMA EDITORIAL Y DE PRODUCTO",
+      "text": "La identidad se expandió hacia un ecosistema completo de aplicaciones donde cada elemento mantiene el mismo lenguaje visual.\n\nUniformes, empaques, vasos, papelería, stickers y comunicación gráfica fueron diseñados para reforzar una experiencia consistente.",
+      "gallery": [
+        "03-identity-lockup.jpeg",
+        "04-editorial-02.jpeg",
+        "05-editorial-01.jpeg",
+        "06-editorial-03.jpeg",
+        "07-editorial-04.png"
+      ]
+    },
+    {
+      "type": "identity",
+      "title": "SISTEMA DE IDENTIDAD VISUAL",
+      "text": "El sistema visual fue construido alrededor de colores cálidos, contrastantes y altamente reconocibles que transmiten energía, apetito y cercanía. La identidad se complementa con un logotipo flexible, variantes adaptables y un conjunto de recursos gráficos que permiten mantener coherencia.",
+      "topImage": "08-identity-clean.jpeg",
+      "overlayLogo": "09-main-logo.png",
+      "logos": [
+        {
+          "label": "Versión Alterna",
+          "image": "10-logo-version.png"
+        },
+        {
+          "label": "Ícono",
+          "image": "11-logo-icon.png"
+        }
+      ],
+      "palette": {
+        "description": "Colores cálidos, intensos y contrastantes que despiertan el apetito, transmiten energía y reflejan la esencia popular, auténtica y urbana de Uff Bakno. La combinación entre amarillo, verde, rojo, negro y tonos neutros construye una identidad altamente reconocible tanto en aplicaciones impresas como digitales.",
+        "mainColor": "#FFA200",
+        "colors": [
+          {
+            "hex": "#F4EEE2",
+            "name": "Crema Neutro"
+          },
+          {
+            "hex": "#000000",
+            "name": "Negro"
+          },
+          {
+            "hex": "#CC0202",
+            "name": "Rojo Callejero"
+          },
+          {
+            "hex": "#1A4820",
+            "name": "Verde Bakno"
+          },
+          {
+            "hex": "#FFA200",
+            "name": "Naranja Sazón"
+          }
+        ]
+      }
+    },
+    {
+      "type": "image-full",
+      "title": "EXPERIENCIA DE MARCA",
+      "text": "Uff Bakno no busca vender únicamente un sándwich; busca crear un lugar al que las personas quieran regresar.\n\nLa experiencia de marca se construye alrededor del parche, la conversación y la autenticidad, convirtiendo cada visita en un momento para compartir.",
+      "image": "12-editorial-05.jpeg"
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Hablemos",
+    "primaryUrl": "https://wa.me/573053818154",
+    "secondaryLabel": "Cotizar Proyecto",
+    "secondaryUrl": "https://wa.me/573053818154"
+  }
+}

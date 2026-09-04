@@ -1,0 +1,258 @@
+/* ── PREMIUM 3-STAGE INTRO FLOW (EYES -> FACE -> PORTRAIT + MENU) ── */
+
+.intro-view {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: var(--bg-dark);
+  overflow: hidden;
+  transition: opacity .15s linear, visibility .15s;
+}
+
+/* Hide entire intro container when body is ready */
+body.ready .intro-view {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.4s;
+  z-index: 1;
+}
+
+.intro-frame.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+/* Responsive Image frame container */
+.intro-pic {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.intro-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.15); /* Start slightly zoomed in for cross-zoom effect */
+  filter: brightness(0.5);
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1), filter 2s ease;
+}
+
+/* When active, images settle into their final position */
+.intro-frame.active .intro-pic img {
+  transform: scale(1);
+  filter: brightness(0.7);
+}
+
+/* Video Intro Containers */
+.intro-video-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.intro-frame.video-ended .intro-video-container {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-pic-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.intro-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.desktop-video {
+  display: block;
+}
+
+.mobile-video {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-video {
+    display: none;
+  }
+  .mobile-video {
+    display: block;
+  }
+}
+
+.frame-1 .intro-pic img {
+  object-position: center 30%;
+}
+
+.frame-2 .intro-pic img {
+  object-position: center center;
+  filter: brightness(1.0);
+}
+
+.intro-frame.active.frame-2 .intro-pic img {
+  filter: brightness(1.0);
+}
+
+
+/* ── STAGE 1 TEXT: fades with video progress (JS controla opacity) ── */
+.stage1-content {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 22px; pointer-events: none; text-align: center;
+}
+.stage1-content::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,.35) 0%, rgba(0,0,0,.1) 45%, rgba(0,0,0,.5) 100%);
+}
+.intro-title {
+  font-family: var(--font-display); color: #fff; font-weight: 900;
+  font-size: clamp(2rem, 5vw, 4rem); letter-spacing: 2px; text-transform: uppercase;
+  text-shadow: 0 10px 30px rgba(0,0,0,.8);
+}
+.intro-hint {
+  font-family: var(--font-body); color: rgba(255,255,255,.85);
+  font-size: .9rem; letter-spacing: 3px; text-transform: uppercase;
+}
+.intro-hint.bounce { animation: bounceUpDown 1.6s infinite ease-in-out; }
+@keyframes bounceUpDown { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+/* ── SCROLL LOCK DURANTE INTRO ── */
+body.has-intro:not(.intro-complete) { overflow: hidden; height: 100vh; }
+body.intro-complete .intro-view { opacity: 0; visibility: hidden; pointer-events: none; }
+
+/* ── STAGE 2: PARALLAX POR FRAMES + REVEAL DEL HERO ── */
+.hero-scroll-wrap { position: relative; height: 260vh; }
+.hero-sticky { position: sticky; top: 0; width: 100%; height: 100vh; overflow: hidden; background: #000000; }
+
+.parallax-frame, .hero-bg-still {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; background-size: cover; background-position: center; z-index: 1;
+}
+.hero-bg-still { opacity: 0; }
+
+.hero-scrim {
+  position: absolute; inset: 0; z-index: 2; opacity: 0;
+  background: linear-gradient(100deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.4) 42%, rgba(0,0,0,.12) 75%, rgba(0,0,0,.25) 100%);
+}
+.hero-name-overlay {
+  position: absolute; inset: 0; z-index: 3; display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 12vh; pointer-events: none;
+}
+.hero-name-overlay h2 {
+  font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900;
+  letter-spacing: 2px; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,.9);
+}
+.hero-final-content {
+  position: absolute; inset: 0; z-index: 4; display: flex; align-items: center;
+  opacity: 0; pointer-events: none;
+}
+
+/* ── DOCK MENU — glass sin blur, con deformación de color ── */
+.morph-menu-container {
+  position: fixed; bottom: 5%; left: 50%; transform: translateX(-50%); z-index: 1005;
+  display: flex; justify-content: center; opacity: 1; pointer-events: auto;
+  transition: opacity .5s ease;
+}
+/* Solo en index (con intro) el menú arranca oculto y se revela al terminar el parallax */
+body.has-intro .morph-menu-container { opacity: 0; pointer-events: none; }
+body.has-intro .morph-menu-container.is-visible { opacity: 1; pointer-events: auto; }
+
+.morph-nav-cards {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: url(#liquid-glass) saturate(180%) contrast(115%);
+  -webkit-backdrop-filter: saturate(180%) contrast(115%) brightness(1.1);
+  border: 1px solid rgba(255,255,255,.35);
+  padding: 10px; border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.25), inset 0 1px 1px rgba(255,255,255,.4), inset 0 -1px 1px rgba(0,0,0,.15);
+}
+.nav-card-item {
+  width: 52px; height: 52px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer;
+  color: rgba(255,255,255,.85); background: transparent;
+  transition: color .3s ease, background .3s ease, transform .3s ease;
+}
+.nav-card-item .icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+.nav-card-item .icon svg { width: 100%; height: 100%; stroke: currentColor; }
+.nav-card-item .icon-glyph { font-family: var(--font-display); font-size: 1rem; font-weight: 700; }
+.nav-card-item .label {
+  position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(4px);
+  white-space: nowrap; font-family: var(--font-display); font-size: .72rem; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; color: #fff; background: rgba(0, 0, 0,.85);
+  padding: 6px 12px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease;
+}
+.nav-card-item:hover { color: #fff; background: rgba(255,255,255,.1); transform: translateY(-3px); }
+.nav-card-item:hover .label { opacity: 1; transform: translateX(-50%) translateY(0); }
+.nav-card-item.active { color: var(--accent); background: rgba(245, 57, 12,.2); }
+
+@media (max-width: 768px) {
+  .morph-menu-container { bottom: 3.5%; }
+  .morph-nav-cards { gap: 3px; padding: 6px; border-radius: 16px; }
+  .nav-card-item { width: 42px; height: 42px; border-radius: 6px; }
+  .nav-card-item .icon { width: 18px; height: 18px; }
+}
+
+/* ── NAV SUPERIOR (logo + CTA) en subpáginas ── */
+nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 0; box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(0, 0, 0,.7) 0%, rgba(0, 0, 0,0) 100%);
+  pointer-events: none;
+}
+nav a { pointer-events: auto; }
+.nav-logo {
+  font-family: var(--font-display); font-weight: 800; font-size: 1.1rem;
+  color: #fff; text-decoration: none; letter-spacing: .5px;
+}
+.nav-cta {
+  font-family: var(--font-body); font-weight: 600; font-size: .85rem;
+  color: #fff; text-decoration: none; letter-spacing: .3px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.25);
+  padding: 8px 18px; border-radius: 20px; backdrop-filter: blur(10px);
+  transition: background .25s ease, border-color .25s ease;
+}
+.nav-cta:hover { background: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 0; }
+  .nav-logo { font-size: .95rem; }
+  .nav-cta { font-size: .75rem; padding: 6px 14px; }
+}
+
+/* Logo y CTA alineados al mismo eje X que el texto de las páginas (container) */
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}

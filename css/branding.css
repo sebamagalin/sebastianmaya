@@ -1,0 +1,606 @@
+/* ── BRANDING & CAROUSEL OVERLAPPING CARDS SECTION ── */
+
+/* Página sin scroll: todo cabe entre el nav y el dock, igual que en web.css */
+body.page-branding {
+  height: 100vh;
+  overflow: hidden;
+}
+
+body.page-branding .page-hero-section {
+  height: 100vh;
+  min-height: 0;
+  padding-top: 100px; /* más ajustado que el --nav-gap general: aquí necesitamos el espacio para las tarjetas */
+  padding-bottom: var(--dock-gap);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  body.page-branding .page-hero-section {
+    padding-top: 90px;
+    padding-bottom: var(--dock-gap-mobile);
+  }
+}
+
+/* Espacios entre subtítulo/título/texto muy reducidos (a escala del alto
+   del texto "SEBASTIAN MAYA."), para liberar espacio a las tarjetas */
+body.page-branding .tagline {
+  margin-bottom: 8px;
+}
+body.page-branding .title-section {
+  margin-bottom: 10px;
+}
+body.page-branding .section-header {
+  margin-bottom: 12px;
+  flex: 0 0 auto;
+}
+
+/* Selector limitado al .container hijo directo de la sección (ver nota en web.css:
+   un selector genérico también afectaría al .container del nav) */
+body.page-branding .page-hero-section > .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* sin esto, el margin:auto heredado lo encoge al ancho de su contenido y lo descuadra del nav */
+  height: 100%;
+  min-height: 0;
+}
+
+.brand-list {
+  display: flex;
+  /* "safe center": centra el grupo cuando las tarjetas caben completas,
+     pero si no caben, se comporta como flex-start en vez de recortar
+     por igual los dos extremos (eso era el "contenedor invisible" que
+     recortaba las tarjetas al hacer scroll) */
+  justify-content: safe center;
+  align-items: center;
+  padding: 24px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  flex: 0 0 auto; /* NO se encoje: conserva siempre el tamaño real de las tarjetas */
+
+  /* FULL-BLEED, igual que .web-grid: el carril ocupa todo el ancho del
+     navegador y el padding se calcula para que la 1ra tarjeta arranque
+     en el mismo eje X que el texto (el .container puede quedar centrado
+     en pantallas anchas, por eso no basta un valor fijo) */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding-left: max(40px, calc((100vw - 1400px) / 2 + 40px));
+  padding-right: max(40px, calc((100vw - 1400px) / 2 + 40px));
+  /* Sin esto, scroll-snap-type "cancela" el padding y arranca en scrollLeft:0
+     como si el padding no existiera, desalineando la 1ra tarjeta del texto */
+  scroll-padding-left: max(40px, calc((100vw - 1400px) / 2 + 40px));
+  scroll-padding-right: max(40px, calc((100vw - 1400px) / 2 + 40px));
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .brand-list {
+    padding-left: 20px;
+    padding-right: 20px;
+    scroll-padding-left: 20px;
+    scroll-padding-right: 20px;
+  }
+}
+
+.brand-card {
+  position: relative;
+  height: min(58vh, 420px); /* tamaño grande, fijo por viewport */
+  aspect-ratio: 3 / 4; /* vertical, formato 3:4 */
+  border-radius: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-left: -80px; /* Overlap effect matching Figma */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), margin 0.5s, box-shadow 0.5s;
+  cursor: pointer;
+}
+
+/* Orden de lectura tradicional: la 1ra tarjeta queda al frente y cada
+   siguiente se apila detrás (z-index descendente). Si agregas más
+   proyectos, súmalos aquí en el mismo orden que en el HTML. */
+.brand-card:nth-child(1) { z-index: 6; }
+.brand-card:nth-child(2) { z-index: 5; }
+.brand-card:nth-child(3) { z-index: 4; }
+.brand-card:nth-child(4) { z-index: 3; }
+.brand-card:nth-child(5) { z-index: 2; }
+.brand-card:nth-child(6) { z-index: 1; }
+
+.brand-card:first-child {
+  margin-left: 0;
+}
+
+.brand-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: brightness(0.85);
+}
+
+.brand-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
+  z-index: 1;
+}
+
+/* Hover effects */
+.brand-card:hover {
+  transform: translateY(-30px) rotate(-1.5deg) scale(1.03);
+  z-index: 10;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+}
+
+.brand-card:hover .brand-card-img {
+  transform: scale(1.05);
+}
+
+/* Push next card to expose it more on hover */
+.brand-card:hover + .brand-card {
+  margin-left: -40px;
+}
+
+/* Card content overlay */
+.brand-card-overlay {
+  position: absolute;
+  bottom: 40px;
+  left: 30px;
+  right: 30px;
+  z-index: 2;
+  transform: translateY(10px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-card:hover .brand-card-overlay {
+  transform: translateY(0);
+}
+
+.brand-card-overlay h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #FFF;
+  margin-bottom: 6px;
+}
+
+.brand-card-overlay p {
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.brand-card-overlay p::after {
+  content: '→';
+  transition: transform 0.3s;
+}
+
+.brand-card:hover .brand-card-overlay p::after {
+  transform: translateX(4px);
+}
+
+/* ── MODALS / STUDY CASES DIALOG ── */
+dialog.study-case-modal {
+  border: none;
+  background: transparent;
+  max-width: 900px;
+  width: 90%;
+  max-height: 85vh;
+  margin: auto;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+  outline: none;
+}
+
+dialog.study-case-modal {
+  opacity: 0;
+  transform: scale(0.92) translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), display 0.4s allow-discrete, overlay 0.4s allow-discrete;
+}
+
+dialog.study-case-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease, display 0.4s allow-discrete, overlay 0.4s allow-discrete;
+}
+
+dialog.study-case-modal[open] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+dialog.study-case-modal[open]::backdrop {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(15px);
+}
+
+@starting-style {
+  dialog.study-case-modal[open] {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  dialog.study-case-modal[open]::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+  }
+}
+
+.modal-content {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #FFF;
+  position: relative;
+  overflow-y: auto;
+  border-radius: 28px;
+}
+
+.modal-header-img {
+  width: 100%;
+  height: 320px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-body {
+  padding: 40px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: var(--accent);
+  border-color: transparent;
+  transform: scale(1.05);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.modal-niche {
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.modal-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 30px;
+}
+
+.modal-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 30px;
+  margin-bottom: 30px;
+}
+
+.modal-detail-item h5 {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.modal-detail-item p {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.modal-behance-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--text-main);
+  color: var(--bg-dark);
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: var(--transition-fast);
+}
+
+.modal-behance-link:hover {
+  background: var(--accent);
+  color: #FFF;
+  box-shadow: 0 10px 25px var(--accent-glow);
+}
+
+/* ── RESPONSIVE MOBILE BRANDING (Mobile-5) ── */
+@media (max-width: 768px) {
+  .brand-list {
+    flex-direction: column;
+    gap: 0px; /* Overlap vertically */
+    padding: 20px 20px;
+    align-items: stretch;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    /* En desktop es flex:0 0 auto para que las tarjetas no se encojan,
+       pero en mobile SÍ necesitamos que se acote a lo que queda de
+       espacio (para que overflow-y:auto tenga un límite real donde
+       hacer scroll) — si no, el contenido se desborda sin control
+       hacia abajo, invadiendo la zona del dock. */
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  
+  .brand-card {
+    width: 100%;
+    height: 160px;
+    max-height: none;
+    flex-shrink: 0;
+    margin-left: 0 !important;
+    margin-top: -30px; /* Slight overlay vertically */
+    border-radius: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+  
+  .brand-card:first-child {
+    margin-top: 0;
+  }
+  
+  .brand-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    /* Antes era z-index:5, más bajo que el z-index base de la 1ra
+       tarjeta (6) — por eso "Purple Life" nunca perdía el primer plano
+       y "Uff Bakno" quedaba detrás al pasar el cursor. Tiene que superar
+       SIEMPRE el z-index base más alto de la pila (6). */
+    z-index: 20;
+  }
+  
+  .brand-card-overlay {
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
+  
+  .modal-details-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   CASE STUDY VIEWER — genérico, JSON-driven, mismas variables
+   para todos los proyectos. Cambiar tamaño = cambiar variables.
+   ══════════════════════════════════════════════════════════ */
+:root {
+  --viewer-width: min(1000px, 92vw);
+  --viewer-height: min(800px, 88vh);
+  --viewer-radius: 28px;
+  --viewer-padding: clamp(24px, 4vw, 56px);
+  --section-gap: clamp(48px, 6vw, 88px);
+  --hero-height: clamp(280px, 38vw, 420px);
+  --content-width: 100%;
+}
+
+dialog.viewer-modal {
+  border: none;
+  background: transparent;
+  width: var(--viewer-width);
+  height: var(--viewer-height);
+  max-width: var(--viewer-width);
+  max-height: var(--viewer-height);
+  margin: auto;
+  padding: 0;
+  border-radius: var(--viewer-radius);
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+  outline: none;
+  opacity: 0;
+  transform: scale(0.92) translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), display 0.4s allow-discrete, overlay 0.4s allow-discrete;
+}
+
+dialog.viewer-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease, display 0.4s allow-discrete, overlay 0.4s allow-discrete;
+}
+
+dialog.viewer-modal[open] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+dialog.viewer-modal[open]::backdrop {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(15px);
+}
+
+@starting-style {
+  dialog.viewer-modal[open] {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  dialog.viewer-modal[open]::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+  }
+}
+
+/* Header fijo (botón cerrar) — nunca se mueve con el scroll interno */
+.viewer-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: var(--transition-fast);
+}
+.viewer-close-btn:hover { background: var(--accent); }
+
+/* Único elemento con scroll: el contenido. El popup nunca cambia de tamaño. */
+.viewer-scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: #000000;
+  color: #FFFFFF;
+}
+
+/* ── HERO ── */
+.viewer-hero {
+  width: 100%;
+  height: var(--hero-height);
+  overflow: hidden;
+}
+.viewer-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.viewer-project-info { padding: var(--viewer-padding) var(--viewer-padding) 0; }
+.viewer-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 12px; }
+.viewer-niche { display: block; font-family: var(--font-body); font-weight: 700; color: var(--accent); letter-spacing: 0.5px; margin-bottom: 16px; }
+.viewer-desc { font-family: var(--font-body); font-weight: 400; line-height: 1.6; max-width: var(--content-width); margin-bottom: 28px; }
+
+.viewer-metadata { display: flex; gap: clamp(24px, 4vw, 56px); flex-wrap: wrap; }
+.viewer-meta-item h5 { font-size: 0.75rem; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 6px; letter-spacing: 0.5px; }
+.viewer-meta-item p { font-size: 0.95rem; font-weight: 400; max-width: 320px; }
+
+.viewer-divider { height: 1px; background: rgba(255, 255, 255, 0.12); margin: var(--section-gap) var(--viewer-padding); }
+
+/* ── SECCIONES (Section / Text Block / Image Block / Gallery) ── */
+.viewer-sections { padding: 0 var(--viewer-padding); display: flex; flex-direction: column; gap: var(--section-gap); }
+
+.viewer-section--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+}
+.viewer-section--img-left { direction: rtl; }
+.viewer-section--img-left > * { direction: ltr; }
+
+.viewer-text-block h4 { font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: 1.1rem; margin-bottom: 14px; }
+.viewer-text-block p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 14px; }
+
+.viewer-image-block img { width: 100%; border-radius: 16px; display: block; }
+
+.viewer-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-radius: 16px; overflow: hidden; }
+.viewer-gallery-item { border-radius: 0; overflow: hidden; }
+.viewer-gallery-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; display: block; }
+
+/* 5 imágenes: 3 arriba + 2 abajo, alineadas en una grilla de 6 columnas, sin gap ni radio (igual que la paleta) */
+.viewer-gallery--3-2 { grid-template-columns: repeat(6, 1fr); gap: 0; }
+.viewer-gallery--3-2 .viewer-gallery-item:nth-child(-n+3) { grid-column: span 2; aspect-ratio: 4/5; }
+.viewer-gallery--3-2 .viewer-gallery-item:nth-child(n+4) { grid-column: span 3; aspect-ratio: 4/3; }
+
+/* ── IDENTITY (grid 2x2: foto+logos arriba, paleta-info+swatches abajo) ── */
+.viewer-identity { display: flex; flex-direction: column; gap: 24px; }
+.viewer-section-title { font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: 1.1rem; }
+.viewer-section-title--center { text-align: center; }
+.viewer-section-text { font-size: 0.95rem; line-height: 1.7; max-width: var(--content-width); }
+
+.viewer-identity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: clamp(180px, 22vw, 230px) auto;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.viewer-identity-grid--no-logos .viewer-identity-photo { grid-column: 1 / -1; }
+.viewer-identity-photo { position: relative; height: 100%; }
+.viewer-identity-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.viewer-identity-overlay-logo {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 8%;
+}
+.viewer-identity-overlay-logo img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 20px rgba(0,0,0,.5)); }
+
+.viewer-logo-system {
+  background: #FFFFFF;
+  height: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+.viewer-logo-item img { max-width: 100%; max-height: 160px; object-fit: contain; }
+.viewer-logo-item:not(:last-child) { border-right: 1px solid rgba(0,0,0,0.15); padding-right: 24px; }
+
+.viewer-palette-info { padding: 24px; display: flex; flex-direction: column; justify-content: center; }
+.viewer-palette-info h5 { color: inherit; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px; }
+.viewer-palette-info p { color: inherit; font-size: 0.8rem; line-height: 1.5; }
+
+.viewer-palette-swatches { display: grid; grid-auto-rows: 1fr; height: 100%; }
+.viewer-swatch { height: 100%; display: flex; align-items: flex-end; padding: 8px; box-sizing: border-box; }
+.viewer-swatch span { font-size: 0.7rem; font-weight: 700; color: #000000; text-shadow: 0 0 4px rgba(255,255,255,.5); }
+
+/* ── CTA / Footer ── */
+.viewer-cta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--viewer-padding) var(--viewer-padding);
+  flex-wrap: wrap; gap: 16px;
+}
+.viewer-cta-name { font-family: var(--font-display); font-weight: 700; color: #FFFFFF; }
+.viewer-btn { padding: 14px 28px; border-radius: 40px; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+.viewer-btn--primary { background: var(--accent); color: #FFFFFF; }
+.viewer-btn--secondary { background: rgba(255, 255, 255, 0.08); color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.15); }
+
+@media (max-width: 768px) {
+  .viewer-section--split { grid-template-columns: 1fr; }
+  .viewer-section--img-left { direction: ltr; }
+  .viewer-identity-grid { grid-template-columns: 1fr; }
+}

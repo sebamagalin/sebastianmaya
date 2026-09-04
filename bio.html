@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sebastian Maya — Biografía</title>
+  <meta name="description" content="Biografía y CV interactivo de Sebastian Maya en formato RPG Dashboard.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/branding.css">
+  <link rel="stylesheet" href="css/web.css">
+  <link rel="stylesheet" href="css/automations.css">
+  <link rel="stylesheet" href="css/bio.css">
+</head>
+
+<body class="ready page-bio">
+
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="liquid-glass" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.025" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+
+  <!-- IDENTIFICACIÓN DE PÁGINA: [BIOGRAFIA_RPG] -->
+
+  <!-- ── NAV BAR ── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">SEBASTIAN MAYA.</a>
+      <a href="https://wa.me/573053818154" class="nav-cta" target="_blank">Hablemos</a>
+    </div>
+  </nav>
+
+  <!-- ── 6. GAMIFIED BIOGRAPHY / RPG DASHBOARD ── -->
+  <section id="bio" class="bio-fullpage">
+        <div class="bio-stage" id="bioStage">
+          <img class="bio-bg-img base desktop-only" src="assets/bio/bio-desktop-1.webp" alt="Sebastian Maya">
+          <img class="bio-bg-img reveal desktop-only" src="assets/bio/bio-desktop-2.webp" alt="">
+          <img class="bio-bg-img base mobile-only" src="assets/bio/bio-mobile-1.webp" alt="Sebastian Maya">
+          <img class="bio-bg-img reveal mobile-only" src="assets/bio/bio-mobile-2.webp" alt="">
+          <div class="bio-scrim"></div>
+          <div class="bio-lens" id="bioLens"></div>
+
+          <div class="bio-header">
+            <span class="bio-badge">Estratega de marcas</span>
+            <h3 class="bio-name">Sebastian Maya</h3>
+            <span class="bio-handle">@sebamagalin</span>
+          </div>
+
+          <div class="bio-menu bio-menu-left">
+            <button class="bio-menu-btn" data-panel="perfil">Perfil</button>
+            <button class="bio-menu-btn" data-panel="experiencia">Experiencia</button>
+          </div>
+
+          <div class="bio-menu bio-menu-right">
+            <button class="bio-menu-btn" data-panel="formacion">Formación</button>
+            <button class="bio-menu-btn" data-panel="habilidades">Habilidades</button>
+          </div>
+
+          <div class="bio-lore">
+            <span class="bio-lore-label">Lore</span>
+            <p>De una idea a una identidad consistente. De la identidad a una presencia digital. De la presencia a sistemas que trabajan solos. Amante del conocimiento más que de la formación en el aula - hoy la IA es la herramienta que permite llevar una idea a la realidad.</p>
+          </div>
+
+          <div class="bio-stats">
+            <div class="stat-row"><div class="stat-info"><span>Dirección de Arte</span><span>90%</span></div><div class="stat-bar-bg"><div class="stat-bar-fill" data-level="90%"></div></div></div>
+            <div class="stat-row"><div class="stat-info"><span>Estrategia de Marca</span><span>80%</span></div><div class="stat-bar-bg"><div class="stat-bar-fill" data-level="80%"></div></div></div>
+            <div class="stat-row"><div class="stat-info"><span>Automatización IA</span><span>65%</span></div><div class="stat-bar-bg"><div class="stat-bar-fill" data-level="65%"></div></div></div>
+            <div class="stat-row"><div class="stat-info"><span>Desarrollo Web UI/UX</span><span>55%</span></div><div class="stat-bar-bg"><div class="stat-bar-fill" data-level="55%"></div></div></div>
+          </div>
+
+          <div class="bio-metrics">
+            <div class="metric"><span class="metric-num" data-count="20" data-prefix="+">+0</span><span class="metric-label">Marcas</span></div>
+            <div class="metric"><span class="metric-num" data-count="100" data-suffix="%">0%</span><span class="metric-label">Crecimiento Orgánico</span></div>
+            <div class="metric"><span class="metric-num" data-count="140" data-suffix="K+">0K+</span><span class="metric-label">Alcance Viral</span></div>
+          </div>
+          <p class="bio-tagline">Buscando un rol estable en Dirección de Arte o Estratega Digital</p>
+
+          <div class="bio-panel bio-panel-left panel-compact" id="panel-perfil">
+            <div class="mini-grid">
+              <div class="mini-stat"><span class="mini-label">Edad</span><span class="mini-val">33</span></div>
+              <div class="mini-stat"><span class="mini-label">Modelo</span><span class="mini-val">1993</span></div>
+              <div class="mini-stat"><span class="mini-label">Altura</span><span class="mini-val">170cm</span></div>
+              <div class="mini-stat"><span class="mini-label">Estado</span><span class="mini-val">Comprometido</span></div>
+            </div>
+          </div>
+
+          <div class="bio-panel bio-panel-left" id="panel-experiencia">
+            <div class="job-grid scroll-x">
+              <div class="job-card">
+                <h4>Smartketing Growth</h4>
+                <div class="job-meta">Cali, Colombia · Septiembre 2022 - Junio2026</div>
+                <p>Liderazgo estratégico en branding y dirección de arte para +20 marcas escaladas en Colombia, España y EE.UU. Gestión de cuentas con 100% de crecimiento orgánico. Automatización de contenido con N8N e integración de APIs.</p>
+              </div>
+              <div class="job-card">
+                <h4>Bodegas Ilusión</h4>
+                <div class="job-meta">Cali, Colombia · Septiembre 2023 - Mayo 2024</div>
+                <p>Diseño y creación de contenido para redes sociales, diagramación y cambios regulares en páginas web para Colombia y EE.UU.</p>
+              </div>
+              <div class="job-card">
+                <h4>Motivo Comunicación</h4>
+                <div class="job-meta">Cali, Colombia · Abril 2023 - Septiembre 2023</div>
+                <p>Creación de branding, reestructuración de marcas y manuales corporativos. Diseño de contenido y páginas web para Colombia, Venezuela, Panamá y Costa Rica.</p>
+              </div>
+              <div class="job-card">
+                <h4>Marketic Agency</h4>
+                <div class="job-meta">Cali, Colombia · Mayo 2022 - Abril 2023</div>
+                <p>Creación de branding y parrilla de contenido mensual para diversas marcas en colombia y estados unidos.</p>
+              </div>
+              <div class="job-card">
+                <h4>El Rincon de Javier</h4>
+                <div class="job-meta">Cali, Colombia · Marzo 2020 - Mayo 2022</div>
+                <p>Creación de contenido de marcas, digitalización del servicio y atención al cliente.</p>
+              </div>
+              <div class="job-card">
+                <h4>Innovando Publicidad</h4>
+                <div class="job-meta">Cali, Colombia · Septiembre 2018 - Enero 2020</div>
+                <p>Creación de material POP papeleria corporativa y material de difusión y promoción para diversas marcas nacionales.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bio-panel bio-panel-right" id="panel-formacion">
+            <div class="edu-grid scroll-x">
+              <button class="edu-card" type="button" data-desc="Formación técnica en fundamentos de diseño: composición, color, tipografía y diagramación aplicados a piezas gráficas para medios impresos y digitales."><h4>FADP · 2017</h4><span>Técnico Profesional en Diseño Gráfico</span></button>
+              <button class="edu-card" type="button" data-desc="Diplomado enfocado en técnicas de fotografía (composición, iluminación, manejo de cámara) y retoque digital para uso profesional en marca personal y proyectos creativos."><h4>FADP · 2017</h4><span>Fotografía y Retoque Digital</span></button>
+              <button class="edu-card" type="button" data-desc="Programa introductorio en inteligencia artificial: conceptos fundamentales, herramientas de IA generativa y su aplicación práctica en flujos de trabajo creativos y empresariales."><h4>Talento Tech · 2025</h4><span>IA Nivel Básico</span></button>
+              <button class="edu-card" type="button" data-desc="Continuación del nivel básico, profundizando en machine learning, automatización con IA, prompt engineering y construcción de flujos de trabajo más avanzados para producción de contenido y sistemas empresariales."><h4>Talento Tech · 2026</h4><span>IA Nivel Intermedio</span></button>
+            </div>
+            <div class="inline-desc-box" id="edu-desc-box"></div>
+          </div>
+
+          <div class="bio-panel bio-panel-right" id="panel-habilidades">
+            <div class="tool-grid scroll-x">
+              <button class="tool-chip" type="button" data-desc="Retoque y composición de imágenes."><img class="skill-logo" src="assets/skills/photoshop.webp" alt="Photoshop"><p class="card-desc">Retoque y composición de imágenes.</p></button>
+              <button class="tool-chip" type="button" data-desc="Creación vectorial de logos e íconos."><img class="skill-logo" src="assets/skills/illustrator.webp" alt="Illustrator"><p class="card-desc">Creación vectorial de logos e íconos.</p></button>
+              <button class="tool-chip" type="button" data-desc="Edición de video para redes y campañas."><img class="skill-logo" src="assets/skills/premiere.webp" alt="Premiere"><p class="card-desc">Edición de video para redes y campañas.</p></button>
+              <button class="tool-chip" type="button" data-desc="Animación y motion graphics para contenido audiovisual."><img class="skill-logo" src="assets/skills/aftereffects.webp" alt="After Effects"><p class="card-desc">Animación y motion graphics para contenido audiovisual.</p></button>
+              <button class="tool-chip" type="button" data-desc="Diseño de interfaces y prototipado."><img class="skill-logo" src="assets/skills/figma.webp" alt="Figma"><p class="card-desc">Diseño de interfaces y prototipado.</p></button>
+              <button class="tool-chip" type="button" data-desc="Diseño rápido de piezas para redes."><img class="skill-logo" src="assets/skills/canva.webp" alt="Canva"><p class="card-desc">Diseño rápido de piezas para redes.</p></button>
+              <button class="tool-chip" type="button" data-desc="Edición ágil de video para contenido corto."><img class="skill-logo" src="assets/skills/capcut.webp" alt="CapCut"><p class="card-desc">Edición ágil de video para contenido corto.</p></button>
+              <button class="tool-chip" type="button" data-desc="Gestión y análisis de campañas publicitarias."><img class="skill-logo" src="assets/skills/meta.webp" alt="Meta"><p class="card-desc">Gestión y análisis de campañas publicitarias.</p></button>
+              <button class="tool-chip" type="button" data-desc="Apoyo de IA en investigación y contenido."><img class="skill-logo" src="assets/skills/gemini.webp" alt="Gemini"><p class="card-desc">Apoyo de IA en investigación y contenido.</p></button>
+              <button class="tool-chip" type="button" data-desc="Asistente de IA para redacción, ideación y research rápido."><img class="skill-logo" src="assets/skills/chatgpt.webp" alt="ChatGPT"><p class="card-desc">Asistente de IA para redacción, ideación y research rápido.</p></button>
+              <button class="tool-chip" type="button" data-desc="Suite creativa para diseño y edición."><img class="skill-logo" src="assets/skills/adobe.webp" alt="Adobe"><p class="card-desc">Suite creativa para diseño y edición.</p></button>
+              <button class="tool-chip" type="button" data-desc="IA para razonamiento profundo, código y automatización de flujos de trabajo."><img class="skill-logo" src="assets/skills/claude.webp" alt="Claude"><p class="card-desc">IA para razonamiento profundo, código y automatización de flujos de trabajo.</p></button>
+              <button class="tool-chip" type="button" data-desc="Automatización de flujos de trabajo y conexión de APIs entre plataformas."><img class="skill-logo" src="assets/skills/n8n.webp" alt="n8n"><p class="card-desc">Automatización de flujos de trabajo y conexión de APIs entre plataformas.</p></button>
+            </div>
+          </div>
+        </div>
+  </section>
+
+  <!-- ── GLOBAL DOCK MENU (6 OPTIONS - GLASS EFFECT) ── -->
+  <div class="morph-menu-container">
+    <div class="morph-nav-cards">
+      <a href="index.html?home=1" class="nav-card-item" data-tooltip="Intro">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg></span>
+        <span class="label">Intro</span>
+      </a>
+      <a href="branding.html" class="nav-card-item" data-tooltip="Branding">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 15-5-5-9 9"/></svg></span>
+        <span class="label">Branding</span>
+      </a>
+      <a href="redes.html" class="nav-card-item" data-tooltip="Redes">
+        <span class="icon"><span class="icon-glyph">@</span></span>
+        <span class="label">Redes</span>
+      </a>
+      <a href="web.html" class="nav-card-item" data-tooltip="Webs">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></span>
+        <span class="label">Webs</span>
+      </a>
+      <a href="automatizaciones.html" class="nav-card-item" data-tooltip="Automatizaciones">
+        <span class="icon"><span class="icon-glyph">&lt;/&gt;</span></span>
+        <span class="label">Automatizaciones</span>
+      </a>
+      <a href="bio.html" class="nav-card-item active" data-tooltip="CV / Ficha">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.8"/><path d="M4 8.5 12 10l8-1.5M12 10v4M8 20l4-6 4 6M9 12l-2 3M15 12l2 3"/></svg></span>
+        <span class="label">CV / Ficha</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Ambient glows -->
+  <div class="glow-bg">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/bio.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,345 @@
+/* ── WEB PROJECTS & ZOOM TRANSITIONS ── */
+
+/* Página sin scroll: todo cabe en 100vh, el scroll queda dentro del carrusel */
+body.page-web {
+  height: 100vh;
+  overflow: hidden;
+}
+
+body.page-web .page-hero-section {
+  height: 100vh;
+  min-height: 0;
+  padding-top: 100px; /* más ajustado que el --nav-gap general: aquí necesitamos el espacio para las tarjetas */
+  padding-bottom: var(--dock-gap);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  body.page-web .page-hero-section {
+    padding-top: 90px;
+    padding-bottom: var(--dock-gap-mobile);
+  }
+}
+
+/* Espacios entre subtítulo/título/texto muy reducidos (a escala del alto
+   del texto "SEBASTIAN MAYA."), para liberar espacio a las tarjetas */
+body.page-web .tagline {
+  margin-bottom: 8px;
+}
+body.page-web .title-section {
+  margin-bottom: 10px;
+}
+body.page-web .section-header {
+  margin-bottom: 12px;
+  flex: 0 0 auto;
+}
+
+/* OJO: selector limitado al .container hijo directo de la sección.
+   Un selector genérico "body.page-web .container" también afecta al
+   .container del <nav> (nav-inner) y rompe el layout del header. */
+body.page-web .page-hero-section > .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* sin esto, el margin:auto heredado lo encoge al ancho de su contenido y lo descuadra del nav */
+  height: 100%;
+  min-height: 0;
+}
+
+.web-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 15px;
+  margin-top: 50px;
+  scrollbar-width: none; /* Firefox */
+  flex: 0 0 auto; /* NO se encoje: conserva siempre el tamaño real de las tarjetas */
+  align-items: center;
+
+  /* FULL-BLEED: el carril ocupa TODO el ancho del navegador, ignorando el
+     max-width/padding de .container, para que al hacer scroll las tarjetas
+     se corten en los bordes reales de la página y no en un límite invisible
+     más angosto. El padding se CALCULA para que la 1ra tarjeta arranque
+     exactamente en el mismo eje X que el texto (el .container real puede
+     quedar centrado en pantallas anchas, por eso no basta un 40px fijo). */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding-left: max(40px, calc((100vw - 1400px) / 2 + 40px));
+  padding-right: max(40px, calc((100vw - 1400px) / 2 + 40px));
+  /* Sin esto, scroll-snap-type "cancela" el padding y arranca en scrollLeft:0
+     como si el padding no existiera, desalineando la 1ra tarjeta del texto */
+  scroll-padding-left: max(40px, calc((100vw - 1400px) / 2 + 40px));
+  scroll-padding-right: max(40px, calc((100vw - 1400px) / 2 + 40px));
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .web-grid {
+    padding-left: 20px;
+    padding-right: 20px;
+    scroll-padding-left: 20px;
+    scroll-padding-right: 20px;
+  }
+}
+
+.web-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.web-card {
+  position: relative;
+  height: min(50vh, 440px); /* tamaño grande, fijo por viewport — no depende del espacio que deje el encabezado */
+  aspect-ratio: 16 / 9;
+  flex: 0 0 auto; /* ancho definido por la relación 16:9 */
+  scroll-snap-align: start;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+  transition: var(--transition-smooth);
+}
+
+.web-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+}
+
+/* Container for the web preview */
+.web-preview-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Default state: showing the Brand Phrase */
+.web-brand-phrase {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  z-index: 3; /* sits on top of the image */
+  background: rgba(0, 0, 0, 0.55) !important; /* Liquid glass dark gray */
+  backdrop-filter: blur(20px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 20px !important;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.web-brand-phrase h3 {
+  font-family: 'Jost', sans-serif !important; /* Jost family */
+  font-size: 1.15rem !important; /* small size */
+  font-weight: 300 !important; /* thin weight */
+  line-height: 1.4 !important;
+  margin-bottom: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: #FFFFFF !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+.web-brand-phrase p {
+  color: var(--accent) !important;
+  font-family: 'Jost', sans-serif !important;
+  text-transform: uppercase !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+}
+
+/* Hover state: revealing the client's webpage mockup */
+.web-actual-hero {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(1.05);
+  opacity: 0; /* completely invisible by default */
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.web-card:hover .web-brand-phrase {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+
+.web-card:hover .web-actual-hero {
+  opacity: 1; /* full clarity screenshot appears */
+  transform: scale(1);
+}
+
+/* Web Frame HUD details */
+.web-hud {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+  pointer-events: none;
+}
+
+.web-card:hover .web-hud {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.web-hud-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}
+
+.web-hud-action {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+/* Zoom Transition Overlay (Created dynamically or present in HTML) */
+.web-zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: #000000;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+}
+
+.web-zoom-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.web-zoom-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(0.6);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.web-zoom-overlay.active .web-zoom-img {
+  transform: scale(1.0);
+}
+
+/* ── TARJETAS EN CONSTRUCCIÓN (imagen placeholder, sin enlace) ── */
+.web-card--construction {
+  cursor: default;
+}
+
+.web-card--construction .web-hud-action {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.65);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ── TARJETA "PRÓXIMO PROYECTO" ── */
+.web-card--soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: default;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px dashed rgba(255, 255, 255, 0.22);
+  box-shadow: none;
+}
+
+.web-card--soon:hover {
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: none;
+}
+
+.soon-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.soon-label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── RESPONSIVE WEB SECTION ── */
+/* Desktop: scroll horizontal (ya definido arriba). Mobile: scroll vertical entre tarjetas */
+@media (max-width: 768px) {
+  .web-grid {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 14px;
+    /* En desktop es flex:0 0 auto para que las tarjetas no se encojan,
+       pero en mobile SÍ necesitamos que se acote a lo que queda de
+       espacio (para que overflow-y:auto tenga un límite real donde
+       hacer scroll) — si no, el contenido se desborda sin control
+       hacia abajo, invadiendo la zona del dock. */
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .web-card {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: 16 / 9;
+    flex: 0 0 auto;
+  }
+  .web-brand-phrase h3 {
+    font-size: 1.4rem;
+  }
+}

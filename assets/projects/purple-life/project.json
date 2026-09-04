@@ -1,0 +1,95 @@
+{
+  "id": "purple-life",
+  "title": "Purple Life",
+  "niche": "WELLNESS & PERSONAL GROWTH SYSTEM",
+  "hero": {
+    "image": "01-hero.jpg",
+    "description": "Desarrollo estratégico de identidad de marca, packaging y diseño editorial para Purple Life. Creamos un lenguaje visual holístico, inspirador y minimalista orientado al bienestar y la autorrealización personal."
+  },
+  "meta": {
+    "cliente": "Purple Life",
+    "año": "2023",
+    "rol": "Brand Strategy | Brand Identity | Packaging | Editorial Design | Art Direction"
+  },
+  "sections": [
+    {
+      "type": "text-image",
+      "layout": "image-right",
+      "title": "CONCEPTO DE MARCA",
+      "text": "Purple Life nace como un sistema de crecimiento personal más que como un producto.\n\nLa identidad debía transmitir equilibrio, claridad y evolución sin recurrir a los códigos tradicionales del bienestar espiritual.\n\nEl objetivo fue construir una marca contemporánea, elegante y cercana capaz de acompañar al usuario en su desarrollo diario.",
+      "image": "02-concept.jpg"
+    },
+    {
+      "type": "text-gallery",
+      "layout": "image-right",
+      "title": "ECOSISTEMA EDITORIAL Y DE PRODUCTO",
+      "text": "El proyecto se expandió hacia un ecosistema completo de producto donde agenda, empaques y elementos complementarios mantienen una misma gramática visual.\n\nCada pieza fue diseñada para reforzar la percepción de calidad, organización y crecimiento personal.",
+      "gallery": [
+        "03-identity-lockup.jpg",
+        "04-editorial-03.jpg",
+        "05-editorial-01.jpg",
+        "06-editorial-06.jpg",
+        "07-editorial-05.jpg"
+      ]
+    },
+    {
+      "type": "identity",
+      "title": "SISTEMA DE IDENTIDAD VISUAL",
+      "text": "El sistema gráfico se construyó alrededor de una paleta serena de violetas y tonos crema que representan introspección, equilibrio y sofisticación. El logotipo y sus variantes fueron diseñados para adaptarse a aplicaciones físicas y digitales manteniendo una identidad consistente.",
+      "topImage": "08-identity-clean.jpg",
+      "overlayLogo": "09-logo-main.png",
+      "logos": [
+        {
+          "label": "Ícono",
+          "image": "10-logo-icon.png"
+        },
+        {
+          "label": "Versión Alterna",
+          "image": "11-logo-version.png"
+        }
+      ],
+      "palette": {
+        "description": "Una gama de tonos morados que representa la transformación y el equilibrio de la espiritualidad, transmitiendo concentración con los tonos cálidos del crema dorado.",
+        "mainColor": "#2A0845",
+        "colors": [
+          {
+            "hex": "#EDDEAF",
+            "name": "Crema Suave"
+          },
+          {
+            "hex": "#CDB382",
+            "name": "Dorado Cálido"
+          },
+          {
+            "hex": "#B3A9ED",
+            "name": "Lavanda"
+          },
+          {
+            "hex": "#E4E3E6",
+            "name": "Gris Perla"
+          },
+          {
+            "hex": "#AE00FF",
+            "name": "Violeta Profundo"
+          },
+          {
+            "hex": "#FF4CFF",
+            "name": "Magenta Vital"
+          }
+        ]
+      }
+    },
+    {
+      "type": "image-full",
+      "title": "ECOSISTEMA EDITORIAL Y DE PRODUCTO",
+      "text": "Más allá de un planner, Purple Life propone una experiencia cotidiana de bienestar.\n\nCada interacción con el producto fue diseñada para reforzar hábitos positivos mediante una identidad visual coherente, materiales editoriales y un lenguaje emocional consistente.",
+      "image": "12-editorial-04.jpg"
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Hablemos",
+    "primaryUrl": "https://wa.me/573053818154",
+    "secondaryLabel": "Cotizar Proyecto",
+    "secondaryUrl": "https://wa.me/573053818154"
+  }
+}

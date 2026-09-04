@@ -1,0 +1,503 @@
+/* ── AUTOMATIONS & SOCIAL MEDIA RESULTS ── */
+
+/* ── HERO DE AUTOMATIZACIONES: VIDEO + WIDGET DE DIALOGFLOW ── */
+/* Todo queda deliberadamente acotado a esta página para no alterar las otras vistas. */
+body.page-automatizaciones {
+  background: #000;
+}
+
+body.page-automatizaciones .automation-hero-section {
+  position: relative;
+  isolation: isolate;
+  height: 100svh;
+  min-height: 680px;
+  padding-top: 100px;
+  padding-bottom: var(--dock-gap);
+  overflow: hidden;
+}
+
+.automation-video-background {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.automation-particles {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.automation-video-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.20) 42%, rgba(0, 0, 0, 0.72) 100%), radial-gradient(ellipse at center, transparent 28%, rgba(0, 0, 0, 0.62) 100%);
+  pointer-events: none;
+}
+
+.automation-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+body.page-automatizaciones .section-header {
+  max-width: 760px;
+  margin-bottom: 0;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.95);
+}
+
+.particle-bot-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding-top: 32px;
+  padding-bottom: 0;
+}
+
+.automation-chat-card {
+  width: min(100%, 332px);
+  padding: 17px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 22px;
+  background: linear-gradient(140deg, rgba(42, 42, 42, 0.20), rgba(8, 8, 8, 0.08));
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+  backdrop-filter: blur(3px) saturate(135%);
+  -webkit-backdrop-filter: blur(3px) saturate(135%);
+  transition: width 260ms ease, background 260ms ease, border-color 260ms ease;
+}
+
+.automation-chat-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
+.automation-chat-heading > div { display: flex; align-items: center; }
+.automation-chat-heading h3 { font-family: var(--font-display); font-size: 0.98rem; font-weight: 700; }
+.automation-chat-status { width: 8px; height: 8px; margin-right: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+.automation-chat-orbit { display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid rgba(245, 57, 12, 0.5); border-radius: 50%; color: var(--accent); font-family: var(--font-display); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; }
+.automation-chat-card p { max-width: 285px; color: rgba(255, 255, 255, 0.86); font-size: 0.78rem; line-height: 1.45; text-shadow: 0 1px 8px #000; }
+.automation-chat-action { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 14px; padding: 10px 13px; border: 1px solid rgba(255, 255, 255, 0.34); border-radius: 11px; background: rgba(0, 0, 0, 0.12); color: #fff; cursor: pointer; font-family: var(--font-body); font-size: 0.78rem; text-align: left; transition: var(--transition-fast); }
+.automation-chat-action span { color: var(--accent); font-size: 1.1rem; }
+.automation-chat-action:hover { border-color: var(--accent); background: rgba(245, 57, 12, 0.14); }
+
+.automation-chat-conversation { display: none; margin-top: 13px; }
+.automation-chat-card.is-open { width: min(100%, 372px); background: linear-gradient(145deg, rgba(29,29,29,.42), rgba(3,3,3,.22)); border-color: rgba(255,255,255,.52); }
+.automation-chat-card.is-open .automation-chat-intro,
+.automation-chat-card.is-open .automation-chat-action { display: none; }
+.automation-chat-card.is-open .automation-chat-conversation { display: block; }
+.automation-chat-messages { display: flex; flex-direction: column; gap: 9px; max-height: 182px; overflow-y: auto; padding: 2px 2px 5px; scrollbar-width: thin; scrollbar-color: rgba(245,57,12,.55) transparent; }
+.automation-message { width: fit-content; max-width: 88%; padding: 9px 11px; border-radius: 13px; font-size: .74rem; line-height: 1.45; animation: automation-message-in 220ms ease-out both; }
+.automation-message--bot { align-self: flex-start; color: rgba(255,255,255,.94); background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.10); }
+.automation-message--user { align-self: flex-end; color: #fff; background: rgba(245,57,12,.78); border-bottom-right-radius: 3px; }
+.automation-message a { color: #fff; text-decoration-color: rgba(255,255,255,.65); font-weight: 700; }
+.automation-chat-suggestions { display: flex; gap: 6px; overflow-x: auto; margin: 10px 0; padding-bottom: 2px; }
+.automation-chat-suggestions button { flex: 0 0 auto; padding: 6px 8px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; color: rgba(255,255,255,.9); background: rgba(0,0,0,.15); cursor: pointer; font: 500 .64rem/1 var(--font-body); }
+.automation-chat-suggestions button:hover { border-color: var(--accent); color: #fff; }
+.automation-chat-form { display: flex; align-items: center; gap: 6px; padding: 5px 6px 5px 12px; border: 1px solid rgba(255,255,255,.34); border-radius: 13px; background: rgba(0,0,0,.38); }
+.automation-chat-form input { min-width: 0; flex: 1; border: 0; outline: 0; color: #fff; background: transparent; font: 400 .76rem var(--font-body); }
+.automation-chat-form input::placeholder { color: rgba(255,255,255,.58); }
+.automation-chat-form button { display: grid; width: 28px; height: 28px; place-items: center; border: 0; border-radius: 9px; color: #fff; background: var(--accent); cursor: pointer; font-size: 1rem; line-height: 1; }
+.automation-chat-form button:hover { filter: brightness(1.15); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@keyframes automation-message-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* El canvas se dibuja con WebGL: muchas micro-partículas sin cargar el hilo principal. */
+.automation-particles {
+  image-rendering: auto;
+}
+
+@media (max-width: 768px) {
+  body.page-automatizaciones .automation-hero-section {
+    min-height: 640px;
+    padding-top: 90px;
+    padding-bottom: var(--dock-gap-mobile);
+  }
+  .particle-bot-section { justify-content: center; padding-top: 20px; }
+  .automation-chat-card { width: min(88vw, 350px); padding: 16px; }
+  .automation-chat-card.is-open { width: min(88vw, 350px); }
+  .automation-chat-messages { max-height: 160px; }
+}
+
+.client-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.client-row {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  padding: 40px;
+}
+
+/* Quote box lives INSIDE .viral-grid as a 4th fixed-size card on desktop only,
+   sized identically to .viral-post so it never resizes like a normal text box. */
+.viral-post.quote-post {
+  background: rgba(15, 15, 15, 0.85);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.viral-post.quote-post .client-quote-text {
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.viral-post.quote-post .quote-icon {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 18px;
+  height: 18px;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.client-quote-text {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.client-quote-text::before {
+  content: '"';
+  color: var(--accent);
+  font-size: 1.6rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: -5px;
+}
+
+.client-info h3 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.client-info .client-niche {
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.client-desc {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.organic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  color: #FFF;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.organic-badge span {
+  color: #F5390C;
+  animation: pulseGreen 1.5s infinite alternate;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+.client-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.c-stat-val {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #FFF;
+  line-height: 1;
+}
+
+.c-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+
+.client-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #FFF;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 4px;
+  transition: var(--transition-fast);
+}
+
+.client-link:hover {
+  color: var(--accent);
+  padding-left: 5px;
+}
+
+/* Viral Posts Grid */
+.viral-grid-container {
+  border-left: 1px solid var(--border-color);
+  padding-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.viral-grid-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.viral-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.viral-post {
+  aspect-ratio: 4/5;
+  border-radius: 20px;
+  background: #000000;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+
+.viral-post img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.viral-post:hover img {
+  transform: scale(1.08);
+}
+
+/* Mobile/tablet fallback for the quote card: full-width block, no fixed
+   aspect-ratio, so the text is never cropped. Hidden on desktop, where the
+   fixed-size card inside .viral-grid is shown instead. */
+.client-quote-mobile {
+  display: none;
+}
+
+
+
+/* ── AUTOMATION FLOW VISUALIZER ── */
+.flow-visualizer {
+  margin-top: 60px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.01);
+  border-radius: 28px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.flow-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flow-title span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.flow-nodes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  gap: 20px;
+}
+
+.flow-node {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--border-color);
+  padding: 20px 24px;
+  border-radius: 16px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+  width: 22%;
+  transition: var(--transition-smooth);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.flow-node:hover {
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px var(--accent-glow);
+  transform: translateY(-4px);
+}
+
+.flow-node-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.flow-node h5 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.flow-node p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* SVG Line connector */
+.flow-svg-container {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.flow-line {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 2;
+  fill: none;
+}
+
+.flow-line-active {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 12, 12;
+  animation: dash 12s linear infinite;
+  fill: none;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+
+/* ── RESPONSIVE AUTOMATIONS ── */
+@media (max-width: 1200px) {
+  .flow-nodes {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .flow-node {
+    width: 100%;
+    max-width: 400px;
+  }
+  .flow-svg-container {
+    display: none; /* Hide svg connection on vertical stack */
+  }
+}
+
+@media (max-width: 1024px) {
+  .client-row {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 30px;
+  }
+  .viral-grid-container {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--border-color);
+    padding-top: 30px;
+  }
+  .viral-grid {
+    /* 2 columns: 2 imágenes arriba, 1 imagen + la tarjeta de texto abajo
+       (la tarjeta de texto se comporta como la 4ta imagen). */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── ESPACIADO DE TEXTO DEL ENCABEZADO (Redes y Automatizaciones) ──
+   Mismo ajuste que se hizo en web.css / branding.css: solo tamaños/
+   espacios de subtítulo, título y texto — no se toca nada más del
+   layout de estas páginas (siguen con scroll normal). */
+body.page-redes .page-hero-section,
+body.page-automatizaciones .page-hero-section {
+  padding-top: 100px;
+}
+@media (max-width: 768px) {
+  body.page-redes .page-hero-section,
+  body.page-automatizaciones .page-hero-section {
+    padding-top: 90px;
+  }
+}
+body.page-redes .tagline,
+body.page-automatizaciones .tagline {
+  margin-bottom: 8px;
+}
+body.page-redes .title-section,
+body.page-automatizaciones .title-section {
+  margin-bottom: 10px;
+}
+body.page-redes .section-header,
+body.page-automatizaciones .section-header {
+  margin-bottom: 12px;
+}
+
+/* ── CAJA DE TEXTO QUE SE COMPORTA COMO IMAGEN (4to tile del viral-grid) ──
+   Solo en mobile: la letra se reduce bastante más que en desktop (0.72rem)
+   para que visualmente pese lo mismo que una imagen dentro de la grilla,
+   sin dejar de ser legible. */
+@media (max-width: 768px) {
+  .viral-post.quote-post .client-quote-text {
+    font-size: 0.5rem;
+    line-height: 1.35;
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "oti-futbol",
+  "title": "OTI Fútbol Base",
+  "niche": "YOUTH FOOTBALL TOURNAMENT BRAND SYSTEM",
+  "hero": {
+    "image": "01-hero.png",
+    "description": "Desarrollo estratégico de identidad de marca, sistema visual y aplicaciones institucionales para OTI Fútbol Base. La identidad fue concebida para representar el crecimiento, la formación y la pasión por el fútbol, construyendo una marca sólida que transmite confianza, disciplina y compromiso con el desarrollo integral de niños y jóvenes."
+  },
+  "meta": {
+    "cliente": "OTI Fútbol Base",
+    "año": "2026",
+    "rol": "Brand Strategy | Brand Identity | Graphic System | Editorial Design | Brand Applications | Art Direction"
+  },
+  "sections": [
+    {
+      "type": "text-image",
+      "layout": "image-right",
+      "title": "CONCEPTO DE MARCA",
+      "text": "OTI Fútbol Base nace con el propósito de formar personas a través del deporte.\n\nMás que una organización de torneos, la marca representa el crecimiento, la disciplina, el trabajo en equipo y los valores que acompañan el desarrollo de cada jugador dentro y fuera de la cancha.\n\nCada elemento fue diseñado para transmitir energía, confianza y el compromiso de construir experiencias deportivas seguras y memorables.",
+      "image": "02-concept.jpeg"
+    },
+    {
+      "type": "text-gallery",
+      "layout": "image-right",
+      "title": "ECOSISTEMA EDITORIAL Y DE PRODUCTO",
+      "text": "La identidad evolucionó hacia un ecosistema completo de aplicaciones donde la comunicación institucional, la publicidad, la señalización, los uniformes, la premiación y los artículos promocionales mantienen un lenguaje visual consistente.\n\nCada aplicación fue desarrollada para fortalecer el reconocimiento del torneo y transmitir profesionalismo en todos los puntos de contacto.",
+      "gallery": [
+        "03-identity-lockup.jpeg",
+        "04-editorial-03.jpeg",
+        "05-editorial-01.jpeg",
+        "06-editorial-06.jpeg",
+        "07-editorial-05.jpeg"
+      ]
+    },
+    {
+      "type": "identity",
+      "title": "SISTEMA DE IDENTIDAD VISUAL",
+      "text": "El sistema visual combina formas dinámicas, recursos gráficos inspirados en el movimiento y una identidad tipográfica de alto impacto que reflejan velocidad, superación y competitividad. La marca se complementa con versiones adaptables, una paleta de colores contundente y elementos gráficos que garantizan coherencia en cualquier formato físico o digital.",
+      "topImage": "08-identity-clean.png",
+      "overlayLogo": "09-main.png",
+      "logos": [
+        {
+          "label": "Ícono",
+          "image": "10-logo-icon.png"
+        }
+      ],
+      "palette": {
+        "description": "Una combinación de rojo, negro y blanco que representa la intensidad del deporte, la fuerza de la competencia y la confianza institucional. La paleta transmite energía, liderazgo y determinación, permitiendo que la identidad mantenga un alto nivel de reconocimiento en todos los escenarios deportivos.",
+        "mainColor": "#E11A2C",
+        "colors": [
+          {
+            "hex": "#FFFFFF",
+            "name": "Blanco"
+          },
+          {
+            "hex": "#000000",
+            "name": "Negro"
+          },
+          {
+            "hex": "#E11A2C",
+            "name": "Rojo Competencia"
+          }
+        ]
+      }
+    },
+    {
+      "type": "image-full",
+      "title": "EXPERIENCIA DE MARCA",
+      "text": "OTI Fútbol Base transforma cada torneo en una experiencia de formación. La marca conecta jugadores, familias, entrenadores y academias alrededor de valores como el respeto, el esfuerzo y el trabajo en equipo, consolidando un entorno donde competir también significa aprender y crecer.",
+      "image": "12-editorial-04.png"
+    }
+  ],
+  "cta": {
+    "primaryLabel": "Hablemos",
+    "primaryUrl": "https://wa.me/573053818154",
+    "secondaryLabel": "Cotizar Proyecto",
+    "secondaryUrl": "https://wa.me/573053818154"
+  }
+}

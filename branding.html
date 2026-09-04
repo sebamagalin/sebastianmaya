@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sebastian Maya — Branding</title>
+  <meta name="description" content="Universo de marcas y proyectos destacados de Sebastián Maya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/branding.css">
+  <link rel="stylesheet" href="css/web.css">
+  <link rel="stylesheet" href="css/automations.css">
+  <link rel="stylesheet" href="css/bio.css">
+</head>
+
+<body class="ready page-branding">
+
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="liquid-glass" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.025" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+
+  <!-- IDENTIFICACIÓN DE PÁGINA: [BRANDING_UNIVERSO] -->
+
+  <!-- ── NAV BAR ── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">SEBASTIAN MAYA.</a>
+      <a href="https://wa.me/573053818154" class="nav-cta" target="_blank">Hablemos</a>
+    </div>
+  </nav>
+
+  <!-- ── BRANDING / BRAND WORLDS (Figma Desktop-5) ── -->
+  <section id="behance" class="page-hero-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="tagline">Universo de Marca</span>
+        <h2 class="title-section">Proyectos Destacados.</h2>
+        <p class="text-lead">Explora el "Mundo de la Marca" al pasar el cursor y haz clic para ver la auditoría.</p>
+      </div>
+
+      <div class="brand-list">
+        <!-- Project 1: Purple Life -->
+        <div class="brand-card" data-project="purple-life">
+          <img src="assets/images/01-PURPLE LIFE.png" alt="Purple Life World" class="brand-card-img">
+          <div class="brand-card-overlay">
+            <h3>Purple Life</h3>
+            <p>Caso de Estudio</p>
+          </div>
+        </div>
+
+        <!-- Project 2: Uff Bakno -->
+        <div class="brand-card" data-project="uff-bakno">
+          <img src="assets/images/02-BAKNO.png" alt="Uff Bakno World" class="brand-card-img">
+          <div class="brand-card-overlay">
+            <h3>Uff Bakno</h3>
+            <p>Ver Caso</p>
+          </div>
+        </div>
+
+        <!-- Project 3: Casa Montero -->
+        <div class="brand-card" data-project="casa-montero">
+          <img src="assets/images/03-CASA MONTERO.png" alt="Casa Montero World" class="brand-card-img">
+          <div class="brand-card-overlay">
+            <h3>Casa Montero</h3>
+            <p>Ver Caso</p>
+          </div>
+        </div>
+
+        <!-- Project 4: OTI Futbol Base -->
+        <div class="brand-card" data-project="oti-futbol">
+          <img src="assets/images/04-OTI.png" alt="OTI Futbol World" class="brand-card-img">
+          <div class="brand-card-overlay">
+            <h3>OTI Futbol Base</h3>
+            <p>Ver Caso</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 60px;">
+        <a href="https://www.behance.net/sebamagalin" target="_blank" class="client-link" style="font-size: 1.1rem;">Ver todos mis proyectos en Behance</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GLOBAL DOCK MENU (6 OPTIONS - GLASS EFFECT) ── -->
+  <div class="morph-menu-container">
+    <div class="morph-nav-cards">
+      <a href="index.html?home=1" class="nav-card-item" data-tooltip="Intro">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg></span>
+        <span class="label">Intro</span>
+      </a>
+      <a href="branding.html" class="nav-card-item active" data-tooltip="Branding">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 15-5-5-9 9"/></svg></span>
+        <span class="label">Branding</span>
+      </a>
+      <a href="redes.html" class="nav-card-item" data-tooltip="Redes">
+        <span class="icon"><span class="icon-glyph">@</span></span>
+        <span class="label">Redes</span>
+      </a>
+      <a href="web.html" class="nav-card-item" data-tooltip="Webs">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></span>
+        <span class="label">Webs</span>
+      </a>
+      <a href="automatizaciones.html" class="nav-card-item" data-tooltip="Automatizaciones">
+        <span class="icon"><span class="icon-glyph">&lt;/&gt;</span></span>
+        <span class="label">Automatizaciones</span>
+      </a>
+      <a href="bio.html" class="nav-card-item" data-tooltip="CV / Ficha">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.8"/><path d="M4 8.5 12 10l8-1.5M12 10v4M8 20l4-6 4 6M9 12l-2 3M15 12l2 3"/></svg></span>
+        <span class="label">CV / Ficha</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── 9. NATIVE DIALOG POPUP (STUDY CASES — LEGACY, proyectos sin project.json) ── -->
+  <dialog id="study-case-dialog" class="study-case-modal">
+    <div class="modal-content">
+      <button class="modal-close-btn" aria-label="Cerrar modal">✕</button>
+      <img src="" alt="" class="modal-header-img">
+      <div class="modal-body">
+        <h3 class="modal-title"></h3>
+        <span class="modal-niche"></span>
+        <p class="modal-desc"></p>
+        
+        <div class="modal-details-grid">
+          <div class="modal-detail-item">
+            <h5>Cliente</h5>
+            <p class="modal-client-val"></p>
+          </div>
+          <div class="modal-detail-item">
+            <h5>Año</h5>
+            <p class="modal-year-val"></p>
+          </div>
+          <div class="modal-detail-item">
+            <h5>Rol</h5>
+            <p class="modal-role-val"></p>
+          </div>
+        </div>
+
+        <a href="" target="_blank" class="modal-behance-link">Ver en Behance →</a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ── 10. CASE STUDY VIEWER (genérico, JSON-driven, cualquier proyecto con /assets/projects/[id]/project.json) ── -->
+  <dialog id="case-study-viewer" class="viewer-modal">
+    <button class="viewer-close-btn" aria-label="Cerrar visor">✕</button>
+    <div class="viewer-scroll" id="viewer-scroll">
+      <!-- Todo el contenido se construye dinámicamente vía js/case-study-viewer.js -->
+    </div>
+  </dialog>
+
+  <!-- Ambient glows -->
+  <div class="glow-bg">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/case-study-viewer.js"></script>
+  <script src="js/branding.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sebastian Maya — Automatizaciones</title>
+  <meta name="description" content="Automatizaciones complejas e integraciones de flujos de marketing y CRM de Sebastián Maya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/branding.css">
+  <link rel="stylesheet" href="css/web.css">
+  <link rel="stylesheet" href="css/automations.css">
+  <link rel="stylesheet" href="css/bio.css">
+</head>
+
+<body class="ready page-automatizaciones">
+
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="liquid-glass" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.025" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+
+  <!-- IDENTIFICACIÓN DE PÁGINA: [AUTOMATIZACIONES_FLUJOS] -->
+
+  <!-- ── NAV BAR ── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">SEBASTIAN MAYA.</a>
+      <a href="https://wa.me/573053818154" class="nav-cta" target="_blank">Hablemos</a>
+    </div>
+  </nav>
+
+  <!-- ── AUTOMATION FLOW VISUALIZER SECTION ── -->
+  <section id="portfolio" class="page-hero-section automation-hero-section">
+    <!-- El lienzo crea el rostro con las partículas de la imagen de referencia. -->
+    <div class="automation-video-background" aria-hidden="true">
+      <canvas id="automation-particles" class="automation-particles"></canvas>
+    </div>
+
+    <div class="container automation-hero-content">
+      <div class="section-header">
+        <span class="tagline">Automatización & IA</span>
+        <h2 class="title-section">Sistemas que impulsan.</h2>
+        <p class="text-lead">Diseño automatizaciones inteligentes que conectan procesos, optimizan tareas y hacen avanzar tu negocio.</p>
+      </div>
+
+      <!-- El chat queda al final de la composición, por encima del dock global. -->
+      <section id="particle-bot-section" class="particle-bot-section">
+        <div class="automation-chat-card" id="automation-chat" aria-label="Asistente virtual de Sebastián Maya">
+          <div class="automation-chat-heading">
+            <div><span class="automation-chat-status"></span><h3>Asistente virtual</h3></div>
+            <span class="automation-chat-orbit">IA</span>
+          </div>
+          <p class="automation-chat-intro">Pregúntame por sus servicios, proyectos o trayectoria.</p>
+          <button id="open-dialogflow" class="automation-chat-action" type="button">Iniciar conversación <span aria-hidden="true">↗</span></button>
+
+          <div class="automation-chat-conversation" aria-live="polite" aria-label="Conversación con el asistente">
+            <div class="automation-chat-messages" id="automation-chat-messages">
+              <article class="automation-message automation-message--bot">Hola, soy el asistente de Sebastián. ¿Qué te gustaría saber?</article>
+            </div>
+            <div class="automation-chat-suggestions" aria-label="Preguntas sugeridas">
+              <button type="button">¿Qué hace Sebastián?</button>
+              <button type="button">¿Qué automatizaciones crea?</button>
+            </div>
+            <form class="automation-chat-form" id="automation-chat-form">
+              <label class="sr-only" for="automation-chat-input">Escribe tu pregunta</label>
+              <input id="automation-chat-input" type="text" autocomplete="off" placeholder="Escribe tu pregunta…" />
+              <button type="submit" aria-label="Enviar pregunta"><span aria-hidden="true">↗</span></button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ── GLOBAL DOCK MENU (6 OPTIONS - GLASS EFFECT) ── -->
+  <div class="morph-menu-container">
+    <div class="morph-nav-cards">
+      <a href="index.html?home=1" class="nav-card-item" data-tooltip="Intro">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg></span>
+        <span class="label">Intro</span>
+      </a>
+      <a href="branding.html" class="nav-card-item" data-tooltip="Branding">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 15-5-5-9 9"/></svg></span>
+        <span class="label">Branding</span>
+      </a>
+      <a href="redes.html" class="nav-card-item" data-tooltip="Redes">
+        <span class="icon"><span class="icon-glyph">@</span></span>
+        <span class="label">Redes</span>
+      </a>
+      <a href="web.html" class="nav-card-item" data-tooltip="Webs">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></span>
+        <span class="label">Webs</span>
+      </a>
+      <a href="automatizaciones.html" class="nav-card-item active" data-tooltip="Automatizaciones">
+        <span class="icon"><span class="icon-glyph">&lt;/&gt;</span></span>
+        <span class="label">Automatizaciones</span>
+      </a>
+      <a href="bio.html" class="nav-card-item" data-tooltip="CV / Ficha">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.8"/><path d="M4 8.5 12 10l8-1.5M12 10v4M8 20l4-6 4 6M9 12l-2 3M15 12l2 3"/></svg></span>
+        <span class="label">CV / Ficha</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Ambient glows -->
+  <div class="glow-bg">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/bot-knowledge.js"></script>
+  <script src="js/bot-search.js"></script>
+  <script src="js/automations-bot.js"></script>
+</body>
+
+</html>

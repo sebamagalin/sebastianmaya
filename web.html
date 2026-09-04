@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sebastian Maya — Sitios Web</title>
+  <meta name="description" content="Sitios web desarrollados a medida con interfaces fluidas e intuitivas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&family=Jost:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/branding.css">
+  <link rel="stylesheet" href="css/web.css">
+  <link rel="stylesheet" href="css/automations.css">
+  <link rel="stylesheet" href="css/bio.css">
+</head>
+
+<body class="ready page-web">
+
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="liquid-glass" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.025" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+
+  <!-- IDENTIFICACIÓN DE PÁGINA: [WEB_SITIOS] -->
+
+  <!-- ── NAV BAR ── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">SEBASTIAN MAYA.</a>
+      <a href="https://wa.me/573053818154" class="nav-cta" target="_blank">Hablemos</a>
+    </div>
+  </nav>
+
+  <!-- ── WEB PAGES SECTION ── -->
+  <section id="web" class="page-hero-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="tagline">Desarrollo Web UI/UX</span>
+        <h2 class="title-section">Sitios Web a Medida.</h2>
+        <p class="text-lead">Pasa el cursor para revelar la interfaz de usuario en vivo y haz clic para experimentar el sitio web oficial del cliente con una transición fluida.</p>
+      </div>
+
+      <div class="web-grid">
+        <!-- Web Card 1: YALA Candles -->
+        <div class="web-card" data-url="https://sebamagalin.github.io/YALACANDLES/">
+          <div class="web-preview-container">
+            <div class="web-brand-phrase">
+              <h3>RITUALES DE LUJO HECHOS A MANO</h3>
+              <p>YALA</p>
+            </div>
+            <img src="assets/images/webyala.png" alt="YALA Candles preview" class="web-actual-hero">
+          </div>
+          <div class="web-hud">
+            <span class="web-hud-title">YALACANDLES.COM</span>
+            <span class="web-hud-action">Visitar Sitio</span>
+          </div>
+        </div>
+
+        <!-- Web Card 2: Home World -->
+        <div class="web-card" data-url="https://sebamagalin.github.io/HOMEWORLD/">
+          <div class="web-preview-container">
+            <div class="web-brand-phrase">
+              <h3>GESTIÓN INMOBILIARIA EN MADRID</h3>
+              <p>HOME WORLD</p>
+            </div>
+            <img src="assets/images/homeworld-preview.png" alt="Home World preview" class="web-actual-hero">
+          </div>
+          <div class="web-hud">
+            <span class="web-hud-title">HOMEWORLD.COM</span>
+            <span class="web-hud-action">Visitar Sitio</span>
+          </div>
+        </div>
+
+        <!-- Web Card 3: Magazín Pacífico (en construcción) -->
+        <div class="web-card web-card--construction">
+          <div class="web-preview-container">
+            <div class="web-brand-phrase">
+              <h3>EL CORAZÓN INFORMATIVO DEL PACÍFICO</h3>
+              <p>MAGAZÍN PACÍFICO</p>
+            </div>
+            <img src="assets/images/FERIA%20EUREKA.png" alt="Magazin Pacifico preview" class="web-actual-hero">
+          </div>
+          <div class="web-hud">
+            <span class="web-hud-title">magazinpacifico.com</span>
+            <span class="web-hud-action">En Construcción</span>
+          </div>
+        </div>
+
+        <!-- Web Card 4: Próximo Proyecto -->
+        <div class="web-card web-card--soon">
+          <span class="soon-icon">+</span>
+          <span class="soon-label">Próximo Proyecto</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GLOBAL DOCK MENU (6 OPTIONS - GLASS EFFECT) ── -->
+  <div class="morph-menu-container">
+    <div class="morph-nav-cards">
+      <a href="index.html?home=1" class="nav-card-item" data-tooltip="Intro">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg></span>
+        <span class="label">Intro</span>
+      </a>
+      <a href="branding.html" class="nav-card-item" data-tooltip="Branding">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 15-5-5-9 9"/></svg></span>
+        <span class="label">Branding</span>
+      </a>
+      <a href="redes.html" class="nav-card-item" data-tooltip="Redes">
+        <span class="icon"><span class="icon-glyph">@</span></span>
+        <span class="label">Redes</span>
+      </a>
+      <a href="web.html" class="nav-card-item active" data-tooltip="Webs">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg></span>
+        <span class="label">Webs</span>
+      </a>
+      <a href="automatizaciones.html" class="nav-card-item" data-tooltip="Automatizaciones">
+        <span class="icon"><span class="icon-glyph">&lt;/&gt;</span></span>
+        <span class="label">Automatizaciones</span>
+      </a>
+      <a href="bio.html" class="nav-card-item" data-tooltip="CV / Ficha">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.8"/><path d="M4 8.5 12 10l8-1.5M12 10v4M8 20l4-6 4 6M9 12l-2 3M15 12l2 3"/></svg></span>
+        <span class="label">CV / Ficha</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── 10. WEB TAB ZOOM TRANSITION OVERLAY ── -->
+  <div id="web-zoom-overlay" class="web-zoom-overlay">
+    <img src="" alt="Web Zooming" class="web-zoom-img">
+  </div>
+
+  <!-- Ambient glows -->
+  <div class="glow-bg">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/web.js"></script>
+</body>
+
+</html>
