@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/branding.css">
   <link rel="stylesheet" href="css/web.css">
   <link rel="stylesheet" href="css/automations.css">
-  <link rel="stylesheet" href="css/bio.css">
+  <link rel="stylesheet" href="css/bio.css?v=20260906-5">
 </head>
 
 <body class="ready page-bio">
@@ -40,10 +40,14 @@
   <!-- ── 6. GAMIFIED BIOGRAPHY / RPG DASHBOARD ── -->
   <section id="bio" class="bio-fullpage">
         <div class="bio-stage" id="bioStage">
-          <img class="bio-bg-img base desktop-only" src="assets/bio/bio-desktop-1.webp" alt="Sebastian Maya">
-          <img class="bio-bg-img reveal desktop-only" src="assets/bio/bio-desktop-2.webp" alt="">
-          <img class="bio-bg-img base mobile-only" src="assets/bio/bio-mobile-1.webp" alt="Sebastian Maya">
-          <img class="bio-bg-img reveal mobile-only" src="assets/bio/bio-mobile-2.webp" alt="">
+          <picture>
+            <source media="(max-width: 768px)" srcset="assets/bio/bio-mobile-1.webp">
+            <img class="bio-bg-img base" src="assets/bio/bio-desktop-1.webp" alt="Sebastian Maya" fetchpriority="high" decoding="async">
+          </picture>
+          <picture>
+            <source media="(max-width: 768px)" srcset="assets/bio/bio-mobile-2.webp">
+            <img class="bio-bg-img reveal" src="assets/bio/bio-desktop-2.webp" alt="" decoding="async">
+          </picture>
           <div class="bio-scrim"></div>
           <div class="bio-lens" id="bioLens"></div>
 
@@ -195,7 +199,7 @@
   <!-- JS Scripts -->
   <script src="js/main.js"></script>
   <script src="js/intro.js"></script>
-  <script src="js/bio.js"></script>
+  <script src="js/bio.js?v=20260906-1"></script>
 </body>
 
 </html>

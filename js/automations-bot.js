@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
   form?.addEventListener('submit', (event) => { event.preventDefault(); ask(input.value); input.value = ''; });
   chat?.querySelectorAll('.automation-chat-suggestions button').forEach((button) => button.addEventListener('click', () => ask(button.textContent)));
 
+  // El retrato estático de CSS se mantiene visible hasta que WebGL termina de
+  // prepararse. Así la sección sigue siendo reconocible aun sin soporte GPU.
   // GPU: dibuja decenas de miles de micro-puntos en una sola llamada, en vez
   // de crear una operación de Canvas por partícula en cada fotograma.
   const gl = canvas.getContext('webgl', { alpha: false, antialias: false }) || canvas.getContext('experimental-webgl', { alpha: false, antialias: false });
@@ -45,12 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const at = { s: gl.getAttribLocation(program, 's'), t: gl.getAttribLocation(program, 't'), c: gl.getAttribLocation(program, 'c'), z: gl.getAttribLocation(program, 'z'), r: gl.getAttribLocation(program, 'r') };
   const un = { R: gl.getUniformLocation(program, 'R'), P: gl.getUniformLocation(program, 'P'), W: gl.getUniformLocation(program, 'W'), A: gl.getUniformLocation(program, 'A'), T: gl.getUniformLocation(program, 'T'), D: gl.getUniformLocation(program, 'D'), Q: gl.getUniformLocation(program, 'Q') };
   const buffers = {}; const reference = new Image(); const pointer = { x: -9999, y: -9999, vx: 0, vy: 0, strength: 0, active: false };
-  let width = 1, height = 1, ratio = 1, count = 0, startedAt = 0, frame = 0, active = false;
+  let width = 1, height = 1, ratio = 1, count = 0, startedAt = 0, frame = 0, active = false, resizeTimer = 0;
   function upload(key, data, components) { if (buffers[key]) gl.deleteBuffer(buffers[key]); buffers[key] = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffers[key]); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW); gl.enableVertexAttribArray(at[key]); gl.vertexAttribPointer(at[key], components, gl.FLOAT, false, 0, 0); }
   function buildPoints() {
     const mobile = window.matchMedia('(max-width:768px)').matches;
-    const lowPower = (navigator.hardwareConcurrency || 8) < 6;
-    const density = mobile ? (lowPower ? 34000 : 56000) : (lowPower ? 90000 : 155000);
+    const lowPower = (navigator.hardwareConcurrency || 8) < 6 || (navigator.deviceMemory && navigator.deviceMemory < 4);
+    // El límite se ajusta al equipo: suficiente densidad para ver rasgos, sin
+    // convertir móviles o tablets en un punto único de fallo de la página.
+    const density = mobile ? (lowPower ? 28000 : 48000) : (lowPower ? 72000 : 118000);
     const sw = mobile ? 520 : 820, sh = Math.round(sw * reference.naturalHeight / reference.naturalWidth);
     const source = document.createElement('canvas'); source.width = sw; source.height = sh;
     const ctx = source.getContext('2d', { willReadFrequently: true }); ctx.fillStyle = '#000'; ctx.fillRect(0, 0, sw, sh); ctx.drawImage(reference, 0, 0, sw, sh);
@@ -75,12 +79,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     upload('s', starts, 2); upload('t', targets, 2); upload('c', colors, 3); upload('z', sizes, 1); upload('r', seeds, 1);
   }
-  function resize() { const bounds = section.getBoundingClientRect(); width = Math.max(1, Math.round(bounds.width)); height = Math.max(1, Math.round(bounds.height)); ratio = Math.min(window.devicePixelRatio || 1, 2); canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); canvas.style.width = `${width}px`; canvas.style.height = `${height}px`; gl.viewport(0, 0, canvas.width, canvas.height); buildPoints(); startedAt = performance.now(); }
+  function resize() { const bounds = section.getBoundingClientRect(); width = Math.max(1, Math.round(bounds.width)); height = Math.max(1, Math.round(bounds.height)); ratio = Math.min(window.devicePixelRatio || 1, 2); canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); canvas.style.width = `${width}px`; canvas.style.height = `${height}px`; gl.viewport(0, 0, canvas.width, canvas.height); buildPoints(); section.classList.add('has-particle-render'); startedAt = performance.now(); }
   function render(time) { if (!active) return; pointer.strength *= pointer.active ? .975 : .925; pointer.vx *= .90; pointer.vy *= .90; if (pointer.strength < .006) pointer.strength = 0; gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); gl.useProgram(program); gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE); gl.uniform2f(un.R, width, height); gl.uniform2f(un.P, pointer.x, pointer.y); gl.uniform2f(un.W, pointer.vx, pointer.vy); gl.uniform1f(un.Q, pointer.strength); gl.uniform1f(un.A, Math.min(1, (time - startedAt) / 1180)); gl.uniform1f(un.T, time / 1000); gl.uniform1f(un.D, ratio); Object.entries(buffers).forEach(([key, buffer]) => { gl.bindBuffer(gl.ARRAY_BUFFER, buffer); gl.enableVertexAttribArray(at[key]); gl.vertexAttribPointer(at[key], key === 'c' ? 3 : key === 's' || key === 't' ? 2 : 1, gl.FLOAT, false, 0, 0); }); gl.drawArrays(gl.POINTS, 0, count); frame = requestAnimationFrame(render); }
   function start() { if (active || !count) return; active = true; startedAt = performance.now(); frame = requestAnimationFrame(render); }
-  new IntersectionObserver(([entry]) => { if (entry.isIntersecting) start(); else { active = false; cancelAnimationFrame(frame); } }, { threshold: .12 }).observe(section);
-  reference.onload = resize; reference.src = 'assets/images/automation-face-reference.jpeg';
-  window.addEventListener('resize', () => { if (reference.complete) resize(); });
-  section.addEventListener('pointermove', (event) => { if (event.pointerType === 'touch') return; const bounds = section.getBoundingClientRect(), x = event.clientX - bounds.left, y = event.clientY - bounds.top; if (pointer.active) { pointer.vx = pointer.vx * .64 + (x - pointer.x) * .36; pointer.vy = pointer.vy * .64 + (y - pointer.y) * .36; } pointer.x = x; pointer.y = y; pointer.strength = 1; pointer.active = true; });
+  const visibility = { inView: false };
+  new IntersectionObserver(([entry]) => { visibility.inView = entry.isIntersecting; if (entry.isIntersecting && !document.hidden) start(); else { active = false; cancelAnimationFrame(frame); } }, { threshold: .12 }).observe(section);
+  reference.decoding = 'async';
+  reference.onload = resize; reference.src = 'assets/images/automation-face-reference-1600.jpg';
+  reference.onerror = () => section.classList.remove('has-particle-render');
+  window.addEventListener('resize', () => { window.clearTimeout(resizeTimer); resizeTimer = window.setTimeout(() => { if (reference.complete) resize(); }, 140); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { active = false; cancelAnimationFrame(frame); } else if (visibility.inView) start(); });
+  canvas.addEventListener('webglcontextlost', (event) => { event.preventDefault(); active = false; cancelAnimationFrame(frame); section.classList.remove('has-particle-render'); });
+
+  function updatePointer(event) {
+    if (event.pointerType === 'touch' && !event.isPrimary) return;
+    if (event.target.closest('#automation-chat')) return;
+    const bounds = section.getBoundingClientRect(), x = event.clientX - bounds.left, y = event.clientY - bounds.top;
+    if (pointer.active) { pointer.vx = pointer.vx * .64 + (x - pointer.x) * .36; pointer.vy = pointer.vy * .64 + (y - pointer.y) * .36; }
+    pointer.x = x; pointer.y = y; pointer.strength = 1; pointer.active = true;
+  }
+  section.addEventListener('pointerdown', updatePointer, { passive: true });
+  section.addEventListener('pointermove', updatePointer, { passive: true });
   section.addEventListener('pointerleave', () => { pointer.active = false; });
+  section.addEventListener('pointerup', () => { pointer.active = false; });
+  section.addEventListener('pointercancel', () => { pointer.active = false; });
 });

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/intro.css?v=20260905-2">
   <link rel="stylesheet" href="css/branding.css">
   <link rel="stylesheet" href="css/web.css">
   <link rel="stylesheet" href="css/automations.css">
@@ -32,12 +32,8 @@
   <div class="intro-view">
     <div class="intro-frame active">
       <div class="intro-video-container">
-        <video muted playsinline preload="auto" class="intro-video desktop-video">
-          <source src="assets/video/Zoom_out_horizontal.mp4" type="video/mp4">
-        </video>
-        <video muted playsinline preload="auto" class="intro-video mobile-video">
-          <source src="assets/video/Zoom_out_vertical.mp4" type="video/mp4">
-        </video>
+        <video muted playsinline preload="none" poster="assets/video/frames/f_001.jpg" class="intro-video desktop-video" data-src="assets/video/Zoom_out_horizontal.mp4"></video>
+        <video muted playsinline preload="none" poster="assets/video/frames/f_001.jpg" class="intro-video mobile-video" data-src="assets/video/Zoom_out_vertical.mp4"></video>
       </div>
 
       <div class="stage1-content">
@@ -52,7 +48,7 @@
     <div class="hero-sticky">
 
       <!-- Secuencia de imágenes del parallax (74 frames), cambiadas según el scroll -->
-      <img class="parallax-frame" src="assets/video/frames/f_001.jpg" alt="">
+      <img class="parallax-frame" src="assets/video/frames/f_001.jpg" alt="" decoding="async" fetchpriority="high">
 
       <!-- Último frame real del parallax como fondo fijo -->
       <div class="hero-bg-still" style="background-image: url('assets/video/parallax-last.jpg');"></div>
@@ -141,7 +137,7 @@
 
   <!-- JS Scripts -->
   <script src="js/main.js"></script>
-  <script src="js/intro.js"></script>
+  <script src="js/intro.js?v=20260905-3"></script>
 </body>
 
 </html>

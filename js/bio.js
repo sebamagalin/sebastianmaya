@@ -3,6 +3,24 @@
 document.addEventListener('DOMContentLoaded', () => {
   const stage = document.getElementById('bioStage');
 
+  // En vertical, estas cuatro piezas se comportan como una sola columna entre
+  // los accesos laterales y el dock. Así el espacio se reparte de forma
+  // consistente en vez de depender de cuatro coordenadas independientes.
+  if (stage && window.matchMedia('(max-width: 900px)').matches) {
+    const infoFlow = document.createElement('div');
+    infoFlow.className = 'bio-mobile-info-flow';
+    const orderedInfo = [
+      stage.querySelector('.bio-stats'),
+      stage.querySelector('.bio-lore'),
+      stage.querySelector('.bio-metrics'),
+      stage.querySelector('.bio-tagline')
+    ].filter(Boolean);
+    if (orderedInfo.length) {
+      stage.querySelector('.bio-scrim')?.after(infoFlow);
+      orderedInfo.forEach(item => infoFlow.append(item));
+    }
+  }
+
   // 1. Animación de barras de stats (arranca al cargar, sin depender de scroll)
   const barFills = document.querySelectorAll('.stat-bar-fill');
   setTimeout(() => {
@@ -106,7 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!e.target.closest('.bio-menu-btn') && !e.target.closest('.bio-panel')) closeAllPanels();
   });
 
-  // 5a. Tarjetas de Formación: resumen en el recuadro fijo #edu-desc-box
+  // 5a. Formación: en móvil la explicación queda bajo la tarjeta elegida,
+  // desplazando las demás como una lista natural. En escritorio se conserva
+  // el panel compacto para no romper la composición horizontal.
   document.querySelectorAll('.edu-card').forEach(card => {
     card.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -115,6 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!wasOpen && eduDescBox) {
         card.classList.add('open');
         eduDescBox.textContent = card.getAttribute('data-desc') || '';
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          card.insertAdjacentElement('afterend', eduDescBox);
+        }
         eduDescBox.classList.add('open');
       } else if (eduDescBox) {
         eduDescBox.classList.remove('open');

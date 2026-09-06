@@ -25,10 +25,28 @@ body.page-automatizaciones .automation-hero-section {
   pointer-events: none;
 }
 
+.automation-video-background::before {
+  content: '';
+  position: absolute;
+  inset: -3%;
+  z-index: 0;
+  background: #000 url('../assets/images/automation-face-reference-1600.jpg') center 54% / auto 100% no-repeat;
+  animation: automation-face-float 5.8s ease-in-out infinite;
+  will-change: transform;
+}
+
 .automation-particles {
   display: block;
   width: 100%;
   height: 100%;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 280ms ease-out;
+}
+
+.automation-hero-section.has-particle-render .automation-particles {
+  opacity: 1;
 }
 
 .automation-video-background::after {
@@ -36,7 +54,13 @@ body.page-automatizaciones .automation-hero-section {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.20) 42%, rgba(0, 0, 0, 0.72) 100%), radial-gradient(ellipse at center, transparent 28%, rgba(0, 0, 0, 0.62) 100%);
+  z-index: 2;
   pointer-events: none;
+}
+
+@keyframes automation-face-float {
+  0%, 100% { transform: scale(1); }
+  50% { transform: translateY(-1.8%) scale(1.095); }
 }
 
 .automation-hero-content {
@@ -110,6 +134,13 @@ body.page-automatizaciones .section-header {
 /* El canvas se dibuja con WebGL: muchas micro-partículas sin cargar el hilo principal. */
 .automation-particles {
   image-rendering: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .automation-video-background::before {
+    animation-duration: 11s !important;
+    animation-iteration-count: infinite !important;
+  }
 }
 
 @media (max-width: 768px) {

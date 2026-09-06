@@ -159,6 +159,13 @@ body.intro-complete .intro-view { opacity: 0; visibility: hidden; pointer-events
 }
 .hero-bg-still { opacity: 0; }
 
+/* Mientras la secuencia se prepara, el visitante ve una imagen estable.
+   La transición ocurre una sola vez cuando todos los fotogramas están listos. */
+.hero-sticky.is-parallax-preparing .parallax-frame { opacity: 0; }
+.hero-sticky.is-parallax-preparing .hero-bg-still { opacity: 1; }
+.hero-sticky.is-parallax-revealing .parallax-frame,
+.hero-sticky.is-parallax-revealing .hero-bg-still { transition: opacity .36s ease; }
+
 .hero-scrim {
   position: absolute; inset: 0; z-index: 2; opacity: 0;
   background: linear-gradient(100deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.4) 42%, rgba(0,0,0,.12) 75%, rgba(0,0,0,.25) 100%);
@@ -174,6 +181,20 @@ body.intro-complete .intro-view { opacity: 0; visibility: hidden; pointer-events
 .hero-final-content {
   position: absolute; inset: 0; z-index: 4; display: flex; align-items: center;
   opacity: 0; pointer-events: none;
+}
+
+/* En vertical el personaje termina en el lado derecho. El contenido baja para
+   no cubrir rostro ni mirada y conservar un área segura sobre el dock. */
+@media (orientation: portrait) and (max-width: 1024px) {
+  .hero-final-content {
+    align-items: flex-end;
+    padding-bottom: max(132px, 16vh);
+    box-sizing: border-box;
+  }
+  .hero-final-content .hero-text { max-width: min(100%, 34rem); }
+  .hero-final-content .title-large { margin-bottom: 16px; }
+  .hero-final-content .text-lead { margin-bottom: 0; }
+  .hero-final-content .hero-metrics { margin-top: 26px; }
 }
 
 /* ── DOCK MENU — glass sin blur, con deformación de color ── */

@@ -3,6 +3,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Reveal elements on scroll (Lazy animation triggers)
   const revealElements = document.querySelectorAll('.client-row, .web-card, .flow-node, .glass-panel, .section-header');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // No dejamos contenido invisible si el navegador no soporta el observador
+  // o el visitante pidió reducir movimiento.
+  if (reducedMotion || !('IntersectionObserver' in window)) {
+    revealElements.forEach(el => el.classList.add('reveal-on-scroll', 'in-view'));
+    return;
+  }
 
   const revealObserverOptions = {
     root: null,

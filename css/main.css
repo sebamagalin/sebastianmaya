@@ -13,6 +13,9 @@
   --font-body: 'Inter', sans-serif;
   --transition-smooth: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.2s ease;
+  --page-gutter: clamp(20px, 4vw, 56px);
+  --section-space: clamp(76px, 10vw, 140px);
+  --content-safe-bottom: max(var(--dock-gap), env(safe-area-inset-bottom));
 
   /* Espacio reservado para que el contenido no choque con el nav (arriba)
      ni con el dock flotante (abajo) en páginas sin scroll (web, branding).
@@ -39,6 +42,7 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-dark);
+  scroll-padding-bottom: var(--content-safe-bottom);
 }
 
 body {
@@ -47,6 +51,14 @@ body {
   color: var(--text-main);
   overflow-x: hidden;
   line-height: 1.6;
+  min-width: 320px;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
 }
 
 /* ── BACKGROUND GLOWS ── */
@@ -92,18 +104,21 @@ body {
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding-inline: var(--page-gutter);
 }
 
 @media (max-width: 768px) {
+  :root {
+    --content-safe-bottom: max(var(--dock-gap-mobile), env(safe-area-inset-bottom));
+  }
   .container {
-    padding: 0 20px;
+    padding-inline: var(--page-gutter);
   }
 }
 
 .tagline {
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: clamp(0.68rem, 0.9vw, 0.85rem);
   text-transform: uppercase;
   letter-spacing: 4px;
   color: var(--accent);
@@ -135,7 +150,7 @@ body {
 }
 
 .text-lead {
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
   color: var(--text-muted);
   font-weight: 300;
   max-width: 750px;
@@ -150,23 +165,23 @@ body {
    antes no se habían reducido para mobile. */
 @media (max-width: 768px) {
   .tagline {
-    font-size: 0.6rem;
-    letter-spacing: 3px;
-    margin-bottom: 6px;
+    font-size: 0.68rem;
+    letter-spacing: 2.6px;
+    margin-bottom: 8px;
   }
   .title-large {
-    font-size: clamp(2.2rem, 8vw, 2.8rem);
-    line-height: 1.02;
+    font-size: clamp(2.25rem, 9vw, 2.85rem);
+    line-height: 1.05;
     margin-bottom: 14px;
   }
   .title-section {
-    font-size: clamp(1.9rem, 8vw, 2.3rem);
-    line-height: 1.02;
-    margin-bottom: 10px;
+    font-size: clamp(2rem, 8.5vw, 2.5rem);
+    line-height: 1.05;
+    margin-bottom: 12px;
   }
   .text-lead {
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.98rem;
+    line-height: 1.5;
   }
   .section-header {
     margin-bottom: 10px;
@@ -204,8 +219,24 @@ body {
 }
 
 section {
-  padding: 120px 0;
+  padding-block: var(--section-space);
   position: relative;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding-block: clamp(64px, 16vw, 92px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
 
 /* ── FOOTER ── */
